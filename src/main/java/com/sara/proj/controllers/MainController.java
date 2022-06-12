@@ -1,5 +1,6 @@
 package com.sara.proj.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,8 @@ public class MainController {
 		model.addAttribute("totalIncome", totalIncome);
 		List<Bill> allBills = billServ.allBills();
 		model.addAttribute("allBills", allBills);
+		HashMap<String, Double> currPercent = billServ.moneySpent();
+		model.addAttribute("currPercent", currPercent);
 		return "main.jsp";
 	}
 }

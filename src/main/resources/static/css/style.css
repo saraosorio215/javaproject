@@ -1,9 +1,19 @@
-@charset "ISO-8859-1";
+@font-face {
+  font-family: 'ModernFont';
+  src: url('Montserrat-Thin.ttf'); /* IE9 Compat Modes */
+}
+
 
 * {
 	margin: 0;
 	padding: 0;
+	font-family: 'Montserrat', sans-serif;
 }
+
+body {	
+	background-color: #DCDCDD;
+}
+
 
 .flex {
 	display: flex;
@@ -13,22 +23,179 @@
 	justify-content: space-between;
 }
 
+.sp-even {
+	justify-content: space-evenly;
+}
+
+.just-cent {
+	justify-content: center;
+}
+
+.al-cent {
+	align-items: center;
+}
+
 .center {
 	text-align: center;
+}
+
+.centered {
+	margin: 0 auto;
 }
 
 .padding-5 {
 	padding: 5px;
 }
 
+.padding-10 {
+	padding: 10px;
+}
+
+.padd-bottom-20 {
+	padding-bottom: 20px;
+}
+
+.margin-5 {
+	margin: 5px;
+}
+
+.marg-top-5, #button {
+	margin-top: 5px;
+}
+
+.marg-left-3 {
+	margin-left: 3px;
+}
+
+.marg-left-5, #name, #amount {
+	margin-left: 5px;
+}
+
+.marg-right-5 {
+	margin-right: 5px;
+}
+
 .marg-bottom-5 {
 	margin-bottom: 5px;
 }
 
-.table {
-	border: 2px solid black;
+.fit-cont {
+	width: fit-content;
 }
 
-.underlined {
-	border-bottom: 2px solid black;
+.half {
+	width: 50%;
+}
+
+.overflow-h {
+	overflow-x: hidden;
+}
+
+.bills-t, .income-t, .bill-list-t {
+	border-collapse: collapse;
+}
+
+.hundred {
+	width: 100%;
+	height: 20px;
+}
+
+.bar div:nth-child(1) {
+	background-color: #253237;
+}
+.bar div:nth-child(2) {
+	background-color: #5c6b73;
+}
+.bar div:nth-child(3) {
+	background-color: #9db4c0;
+}
+.bar div:nth-child(4) {
+	background-color: #c2dfe3;
+}
+.bar div:nth-child(5) {
+	background-color: #e0fbfc;
+}
+
+.eighty {
+	width: 80%;
+}
+
+.seventy {
+	width: 70%;
+}
+
+.thirty {
+	width: 30%;
+}
+
+.bill-list-t {
+	width: 100%;
+}
+
+.right {
+	text-align: right;
+}
+
+
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: #88C45A;
+}
+
+.white {
+	color: white;
+}
+
+.dark {
+	background-color: #789180;
+}
+
+/**************BORDERS************************/
+.border-main {
+	border: 3px solid #CEAE64;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.border {
+	border: 3px solid #ECDFC1;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+.underlined, tr.underlined {
+	border-bottom: 3px solid #ECDFC1;
+}
+
+.border-left {
+	border-left: 3px solid #ECDFC1;
+}
+
+/**************PHOTOS**************************/
+
+#icon-sm {
+	height: 20px;
+	width: auto;
+}
+
+/*************INPUTS**************************/
+#amount, #name {
+	border: none;	
+	height: 1.5vw;
+}
+
+#name {
+	width: 16vw;
+}
+
+#amount {
+	width: 14.5vw;
+}
+
+/*************BUTTONS**************************/
+#button {
+	border: none;
+	padding: 3px;
+	cursor: pointer;
 }

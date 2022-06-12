@@ -1,5 +1,6 @@
 package com.sara.proj.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sara.proj.models.Bill;
+import com.sara.proj.models.Category;
 import com.sara.proj.repositories.BillRepo;
+import com.sara.proj.repositories.CategoryRepo;
 
 @Service
 public class BillService {
@@ -15,9 +18,13 @@ public class BillService {
 	@Autowired
 	private final BillRepo billRepo;
 	
+	@Autowired
+	private final CategoryRepo catRepo;
+	
 	//CONSTRUCTOR
-	public BillService(BillRepo billRepo) {
+	public BillService(BillRepo billRepo, CategoryRepo catRepo) {
 		this.billRepo = billRepo;
+		this.catRepo = catRepo;
 	}
 	
 	//METHODS
@@ -42,6 +49,37 @@ public class BillService {
 			}
 		}
 		return totalPaid;
+	}
+	
+	public HashMap<String, Double> moneySpent(){
+		HashMap<String, Double> map = new HashMap<String, Double>();
+		List<Category> allCats = catRepo.findAll();
+		List<Bill> allBills = billRepo.findAll();
+		Double totalAmt = 0.0;
+		for(int i=0; i<allBills.size(); i++) {
+			totalAmt += allBills.get(i).getAmount();				
+		}
+		for(int i=0; i<allCats.size(); i++) {
+			Double catSum = 0.0;
+			String catName = allCats.get(i).getName();
+			List<Bill> allCatBills = allCats.get(i).getBills();
+			for(int j=0; j<allCatBills.size(); j++) {
+				catSum += allCatBills.get(j).getAmount();
+			}
+			catSum = (catSum/totalAmt) *100;
+			catSum = round(catSum, 2);
+			map.put(catName, catSum);
+		}
+		return map;
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
 	}
 	
 	//FIND ALL
