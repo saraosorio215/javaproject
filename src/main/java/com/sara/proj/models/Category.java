@@ -9,12 +9,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="categories")
@@ -30,9 +34,15 @@ public class Category {
 	@OneToMany(mappedBy="category", fetch=FetchType.LAZY)
 	private List<Bill> bills;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id")
+	private User user;
+	
 	@Column(updatable=false)
+	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private Date createdAt;
 	
+	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private Date updatedAt;
 	
 	//CONSTRUCTOR
@@ -81,6 +91,14 @@ public class Category {
 		this.updatedAt = updatedAt;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@PrePersist
 	protected void onCreate(){
 		this.createdAt = new Date();

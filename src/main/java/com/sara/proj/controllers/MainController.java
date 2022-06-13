@@ -46,4 +46,9 @@ public class MainController {
 		model.addAttribute("currPercent", currPercent);
 		return "main.jsp";
 	}
+	
+	@GetMapping("/loginreg/")
+	public String loginReg() {
+		return "loginreg.jsp";
+	}
 }

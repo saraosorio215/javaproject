@@ -65,6 +65,10 @@
 	padding-left: 10px;
 }
 
+.padd-right-5 {
+	padding-right: 5px;
+}
+
 .padd-right-10 {
 	padding-right: 10px;
 }
@@ -136,56 +140,6 @@
 
 .full {
 	width: 100%;
-}
-
-.bar div:nth-child(1) {
-	background-color: #89fc00;
-}
-.bar div:nth-child(2) {
-	background-color: #01baef;
-}
-.bar div:nth-child(3) {
-	background-color: #f72585;
-}
-.bar div:nth-child(4) {
-	background-color: #1dd3b0;
-}
-.bar div:nth-child(5) {
-	background-color: #8a54ff;
-}
-.bar div:nth-child(6) {
-	background-color: #fe3218;
-}
-.bar div:nth-child(7) {
-	background-color: #5d0933;
-}
-.bar div:nth-child(8) {
-	background-color: #664d00;
-}
-
-.bar-title div:nth-child(1) {
-	color: #89fc00;
-}
-.bar-title div:nth-child(2) {
-	color: #01baef;
-}
-.bar-title div:nth-child(3) {
-	color: #f72585;
-}
-.bar-title div:nth-child(4) {
-	color: #1dd3b0;
-}
-.bar-title div:nth-child(5) {
-	color: #8a54ff;
-}
-.bar-title div:nth-child(6) {
-	color: #fe3218;
-}
-.bar-title div:nth-child(7) {
-	color: #5d0933;
-}
-.bar-title div:nth-child(8) {
-	color: #664d00;
 }
 
 .eighty {
@@ -401,4 +355,64 @@ body {
 .add-form {
 	max-width: fit-content;
 	height: fit-content;
+}
+
+.blank {
+	text-decoration: none;
+	color: black;
+}
+
+.tabs {
+	margin-left: 20%;
+}
+
+/****************BAR*********************/
+.bar div:nth-child(1) {
+	background-color: #89fc00;
+}
+.bar div:nth-child(2) {
+	background-color: #01baef;
+}
+.bar div:nth-child(3) {
+	background-color: #f72585;
+}
+.bar div:nth-child(4) {
+	background-color: #1dd3b0;
+}
+.bar div:nth-child(5) {
+	background-color: #8a54ff;
+}
+.bar div:nth-child(6) {
+	background-color: #fe3218;
+}
+.bar div:nth-child(7) {
+	background-color: #5d0933;
+}
+.bar div:nth-child(8) {
+	background-color: #664d00;
+}
+
+.bar-title div:nth-child(1) {
+	color: #89fc00;
+}
+.bar-title div:nth-child(2) {
+	color: #01baef;
+}
+.bar-title div:nth-child(3) {
+	color: #f72585;
+}
+.bar-title div:nth-child(4) {
+	color: #1dd3b0;
+}
+.bar-title div:nth-child(5) {
+	color: #8a54ff;
+}
+.bar-title div:nth-child(6) {
+	color: #fe3218;
+}
+.bar-title div:nth-child(7) {
+	color: #5d0933;
+}
+.bar-title div:nth-child(8) {
+	color: #664d00;
 }

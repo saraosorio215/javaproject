@@ -1,6 +1,7 @@
 package com.sara.proj.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,38 +11,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="bills")
-public class Bill {
+@Table(name="accounts")
+public class Account {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
-	@Size(min = 2, max = 50)
+	@NotEmpty(message="Message is required!")
+	@Size(min=3, max=20, message="Name must be between 3 and 20 characters")
 	private String name;
 	
-	@NotNull
-	private Double amount;
+	@OneToMany(mappedBy="account", fetch = FetchType.LAZY)
+	private List<Bill> bills;
 	
-	@NotNull
-	private Boolean isPaid;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="category_id")
-	private Category category;
+	@OneToMany(mappedBy="account", fetch = FetchType.LAZY)
+	private List<Income> incomes;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="account_id")
-	private Account account;
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="MM-dd-yyyy")
@@ -51,10 +49,9 @@ public class Bill {
 	private Date updatedAt;
 	
 	//CONSTRUCTOR
-	public Bill() {
+	public Account() {
 	}
 
-	//GETTERS & SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -71,20 +68,28 @@ public class Bill {
 		this.name = name;
 	}
 
-	public Double getAmount() {
-		return amount;
+	public List<Bill> getBills() {
+		return bills;
 	}
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
 	}
 
-	public Category getCategory() {
-		return category;
+	public List<Income> getIncomes() {
+		return incomes;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setIncomes(List<Income> incomes) {
+		this.incomes = incomes;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Date getCreatedAt() {
@@ -102,27 +107,12 @@ public class Bill {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	public Boolean getIsPaid() {
-		return isPaid;
-	}
-
-	public void setIsPaid(Boolean isPaid) {
-		this.isPaid = isPaid;
-	}
-	
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
 
 	@PrePersist
 	protected void onCreate(){
 		this.createdAt = new Date();
 	}
+	
 	@PreUpdate
 	protected void onUpdate(){
 		this.updatedAt = new Date();

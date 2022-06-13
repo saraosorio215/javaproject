@@ -4,14 +4,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="incomes")
@@ -27,9 +32,15 @@ public class Income {
 	@NotNull
 	private Double amount;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="account_id")
+	private Account account;
+	
 	@Column(updatable=false)
+	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private Date createdAt;
 	
+	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private Date updatedAt;
 	
 	//CONSTRUCTOR
@@ -77,6 +88,14 @@ public class Income {
 		this.updatedAt = updatedAt;
 	}
 	
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	@PrePersist
 	protected void onCreate(){
 		this.createdAt = new Date();

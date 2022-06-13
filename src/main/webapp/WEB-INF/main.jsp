@@ -26,17 +26,20 @@
 	<div class="center marg-top-5">
 		<h1>Budget Tracker</h1>
 		<h2 class="marg-bottom-5">June 2022</h2>
+		<a href="/loginreg/"><h4>Login / Register</h4></a>
 	</div>
-	<div class="flex just-left marg-left-20">
-		<div class="pink">
+	<div class="flex just-left marg-left-20 tabs">
+		<a href="+" class="blank"><div class="pink">
 			<h4 class="padding-10">Overview</h4>
-		</div>
+		</div></a>
+		<a href="+" class="blank">
 		<div class="marg-left-20 orange">
 			<h4 class="padding-10">New account</h4>
 		</div>
+		</a>
 	</div>
-	<div class="flex centered marg-left-5 marg-right-5 marg-bottom-5 al-cent">
-		<div class="dark full border-main">
+	<div class="flex just-cent al-cent">
+		<div class="dark border-main">
 			<div>
 				<div class="flex sp-even marg-top-10">
 					<div>
@@ -52,7 +55,16 @@
 									</thead>
 									<tbody>
 										<tr class="grey">
-											<td class="padding-5 light-grey"><h3><fmt:formatNumber value="${totalDue}" type="currency" /></h3></td>
+											<c:if test="${totalDue > 0}">
+												<td class="padding-5 red">
+													<h3><fmt:formatNumber value="${totalDue}" type="currency" /></h3>
+												</td>
+											</c:if>
+											<c:if test="${totalDue == 0}">
+												<td class="padding-5 light-grey">
+													<h3><fmt:formatNumber value="${totalDue}" type="currency" /></h3>
+												</td>
+											</c:if>
 											<td class="center border-left padding-5 light-grey"><h3><fmt:formatNumber value="${totalPaid}" type="currency" /></h3></td>
 										</tr>
 									</tbody>
@@ -86,7 +98,7 @@
 							</div>
 							<div class="hundred flex green">
 								<div style="width: ${(totalPaid / totalIncome) * 100}%" class="red"></div>
-								<h4 class="marg-left-5">Remaining</h4>
+								<h5 class="marg-left-5 padd-top-5 padd-right-5">Remaining</h5>
 								</div>
 							</div>
 						</div>
@@ -98,8 +110,8 @@
 								<c:forEach items="${currPercent}" var="entry">
 								<c:if test="${entry.value > 0.0}">
 								<div class="flex marg-bottom-5">
-									<h3><c:out value="${entry.key}"/>:</h3>
-									<h3 class="marg-left-5"><c:out value="${entry.value}"/>%</h3>				
+									<h4><c:out value="${entry.key}"/>:</h4>
+									<h4 class="marg-left-5"><c:out value="${entry.value}"/>%</h4>				
 								</div>
 								</c:if>
 								</c:forEach>
@@ -119,29 +131,28 @@
 		                    <h4 class="marg-bottom-5 marg-left-5 white">Total: <fmt:formatNumber value="${totalPaid + totalDue}" type="currency" /></h4>
 		                </div>
 		                <div class="margin-5">
-		                    <table class="border center bill-list-t">
+		                    <table class="border bill-list-t">
 		                        <thead>
-		                            <tr class="grey">
+		                            <tr class="grey center">
 		                                <th class="underlined padding-5">Name</th>
 		                                <th class="underlined padding-5">Amount</th>
-		                                <th class="underlined padding-5">Category</th>
 		                                <th class="underlined padding-5">Paid?</th>
-		                                <th class="underlined padding-5">Update</th>
-		                                <th class="underlined padding-5">Edit</th>
-		                                <th class="underlined padding-5">Delete</th>
+		                                <th class="underlined padding-5">Category</th>
+		                                <th class="underlined padding-5" colspan="3">Actions</th>
 		                            </tr>
 		                        </thead>
 		                        <tbody>
 		                            <c:forEach items="${allBills}" var="bill">
-		                            <tr class="light-grey">
+		                            <tr class="light-grey center">
 		                                <td class="underlined"><c:out value="${bill.getName()}"/></td>
 		                                <td class="underlined"><fmt:formatNumber value="${bill.getAmount()}" type="currency" /></td>
-		                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
-		                                <c:if test="${bill.getIsPaid() == false}"><td class="underlined"><img src="images/x-icon.png" alt="logo" id="icon-sm"></td>
+		                                <c:if test="${bill.getIsPaid() == false}"><td class="underlined center"><img src="images/x-icon.png" alt="logo" id="icon-sm"></td>
+			                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
 		                                    <td class="underlined"><a href="/paid/${bill.id}/"><button id="button">Paid</button></a></td>
 		                                </c:if>
 		                                <c:if test="${bill.getIsPaid() == true}">
 		                                    <td class="underlined"><img src="images/checkmark-icon.png" alt="logo" id="icon-sm"></td>
+			                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
 		                                    <td class="underlined"><a href="/unpaid/${bill.id}/"><button id="button">Not Paid</button></a></td>
 		                                </c:if>
 		                                <td class="underlined"><a href="/edit/bill${bill.id}/" id="button-edit"><img src="images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
