@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import com.sara.proj.models.Account;
+import com.sara.proj.models.Bill;
+import com.sara.proj.models.Category;
+import com.sara.proj.models.Income;
 import com.sara.proj.models.LoginUser;
 import com.sara.proj.models.User;
+import com.sara.proj.repositories.BillRepo;
+import com.sara.proj.repositories.CategoryRepo;
 import com.sara.proj.repositories.UserRepo;
 
 @Service
@@ -18,7 +24,37 @@ public class UserService {
 	@Autowired
 	private UserRepo userRepo;
 	
+	@Autowired
+	private CategoryRepo catRepo;
+	
+	@Autowired
+	private BillRepo billRepo;
+	
 	//METHODS
+	public Double totalBills(Long id) {
+		List<Category> allCats = userRepo.findById(id).get().getCategories();
+		Double total = 0.0;
+		for(int i=0; i<allCats.size(); i++) {
+			List<Bill> allBills = allCats.get(i).getBills();
+			for(int j=0; j<allBills.size(); j++) {
+				total += allBills.get(i).getAmount();
+			}
+		}
+		return total;
+	}
+	
+	public Double totalIncome(Long id) {
+		List<Account> allAccts = userRepo.findById(id).get().getAccounts();
+		Double total = 0.0;
+		for(int i=0; i<allAccts.size(); i++) {
+			List<Income> allIncome = allAccts.get(i).getIncomes();
+			for(int j=0; j<allIncome.size(); j++) {
+				total += allIncome.get(i).getAmount();
+			}
+		}
+		return total;
+	}
+	
 	//FIND ALL
 	public List<User> allUsers() {
 		return userRepo.findAll();

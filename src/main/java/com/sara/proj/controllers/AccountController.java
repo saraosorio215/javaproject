@@ -9,31 +9,31 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.sara.proj.models.Category;
+import com.sara.proj.models.Account;
 import com.sara.proj.models.User;
-import com.sara.proj.services.CategoryService;
+import com.sara.proj.services.AccountService;
 import com.sara.proj.services.UserService;
 
 @Controller
-public class CatController {
+public class AccountController {
 
 	@Autowired
-	private CategoryService catServ;
-	
+	private AccountService acctServ;
+
 	@Autowired
 	private UserService userServ;
 	
-	//POST METHOD
-	@PostMapping("/new/cat/")
-	public String createCat(@Valid @ModelAttribute("cat") Category cat, BindingResult result, HttpSession session) {
+	//POST MAPPING
+	@PostMapping("/new/account/")
+	public String newAccount(@Valid @ModelAttribute("newAccount") Account account, BindingResult result, HttpSession session) {
 		if(result.hasErrors()) {
-			return "main.jsp";
+			return "overview.jsp";
 		}
 		else {
 			User currUser = userServ.findOneById((Long) session.getAttribute("user_id"));
-			cat.setUser(currUser);
-			catServ.createCat(cat);
-			return "redirect:/";
+			account.setUser(currUser);
+			acctServ.createAccount(account);
+			return "redirect:/overview/";
 		}
 	}
 }

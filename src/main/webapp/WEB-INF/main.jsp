@@ -23,23 +23,23 @@
 	<title>Budget Tracker</title>
 </head>
 <body>
-	<div class="center marg-top-5">
+	<div class="center marg-top-5 marg-bottom-5">
 		<h1>Budget Tracker</h1>
 		<h2 class="marg-bottom-5">June 2022</h2>
-		<a href="/loginreg/"><h4>Login / Register</h4></a>
+		<a href="/logout/">Logout</a>
 	</div>
-	<div class="flex just-left marg-left-20 tabs">
-		<a href="+" class="blank"><div class="pink">
-			<h4 class="padding-10">Overview</h4>
-		</div></a>
-		<a href="+" class="blank">
-		<div class="marg-left-20 orange">
-			<h4 class="padding-10">New account</h4>
+	<div class="flex just-cent">
+		<div class="border-main">
+			<div class="underlined padding-5">
+				<h2 class="center padding-5">All Accounts</h2>
+			</div>
+			<div class="padding-5">
+				<c:forEach items="${allAccounts}" var="acct">
+					<a href="/acct/${acct.id}/"><c:out value="${acct.name}"/></a>
+				</c:forEach>
+			</div>
 		</div>
-		</a>
-	</div>
-	<div class="flex just-cent al-cent">
-		<div class="dark border-main">
+		<div class="dark main-acct">
 			<div>
 				<div class="flex sp-even marg-top-10">
 					<div>
@@ -170,27 +170,14 @@
 		            </div>
 				</div>
 	        </div>
-        	<div class="full add-form">
+        	<div class="full add-form border-main">
 			    <div class="center">
 				    <div class="dark underlined">
 				    	<h2 class="center padding-5 white">Quick Add</h2>
 				    </div>
-				    <div class="add-cat underlined">
-			            <h3 class="marg-bottom-5 center">Add Category</h3>
-			            <form:form action="/new/cat/" method="post" modelAttribute="cat" autocomplete="off">
-			                <h4 class="marg-bottom-10 left">
-			                    <form:label path="name">Name</form:label>
-			                    <form:errors path="name"/>
-			                    <form:input path="name" id="name"/>
-			                </h4>
-			                <p class="center">
-			                    <input type="submit" value="Create" id="button"/>
-			                </p>
-			            </form:form>
-			        </div>
 			        <div class="add-income underlined">
 			            <h3 class="marg-bottom-5 center">Add Income</h3>
-			            <form:form action="/new/income/" method="post" modelAttribute="income" class="left" autocomplete="off">
+			            <form:form action="/new/income/${currAcct.id}/" method="post" modelAttribute="income" class="left" autocomplete="off">
 			            <h4 class="marg-bottom-5">
 				            <form:label path="name">Name</form:label>
 			                <form:errors path="name"/>
@@ -208,7 +195,7 @@
 			        </div>
 			        <div class="add-bill underlined">
 			            <h3 class="marg-bottom-5 marg-top-5 center">Add Bill</h3>
-			            <form:form action="/new/bill/" method="post" modelAttribute="bill" class="left" autocomplete="off">
+			            <form:form action="/new/bill/${currAcct.id}/" method="post" modelAttribute="bill" class="left" autocomplete="off">
 			                <h4 class="marg-bottom-5">
 			                    <form:label path="name">Name</form:label>
 			                    <form:errors path="name"/>

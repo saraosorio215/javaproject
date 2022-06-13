@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.sara.proj.models.Account;
 import com.sara.proj.models.Bill;
+import com.sara.proj.services.AccountService;
 import com.sara.proj.services.BillService;
 
 @Controller
@@ -19,6 +21,9 @@ public class BillController {
 	
 	@Autowired
 	private BillService billServ;
+	
+	@Autowired
+	private AccountService acctServ;
 	
 	//GET METHOD
 	@GetMapping("/paid/{id}/")
@@ -39,14 +44,17 @@ public class BillController {
 	
 	
 	//POST METHOD
-	@PostMapping("/new/bill/")
-	public String newBill(@Valid @ModelAttribute("bill")Bill bill, BindingResult result) {
+	@PostMapping("/new/bill/{id}")
+	public String newBill(@Valid @ModelAttribute("bill")Bill bill, BindingResult result, @PathVariable("id") Long id) {
 		if(result.hasErrors()) {
 			return "main.jsp";
 		}
 		else {
+			Account currAcct = acctServ.findOneById(id);
+			bill.setAccount(currAcct);
 			billServ.createBill(bill);
-			return "redirect:/";
+			currAcct.getBills().add(bill);
+			return "redirect:/overview/";
 		}
 	}
 	

@@ -77,7 +77,7 @@
 	margin: 5px;
 }
 
-.marg-top-5 {
+.marg-top-5, #email, #password, #confirm {
 	margin-top: 5px;
 }
 
@@ -252,16 +252,15 @@ body {
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 }
 
-.underlined, tr.underlined, .add-form {
+.underlined, tr.underlined, .add-form, .main-acct {
 	border-bottom: 3px solid #FFC857;
 }
 
-.border-left {
+.border-left, .main-acct {
 	border-left: 3px solid #FFC857;
 }
 
-.add-form {
-	border-right: 3px solid #FFC857;
+.main-acct {
 	border-top: 3px solid #FFC857;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
@@ -274,13 +273,17 @@ body {
 }
 
 /*************INPUTS**************************/
-#amount, #name {
+#amount, #name, #email, #password, #confirm {
 	border: none;	
 	height: 20px;
 }
 
 #name {
 	width: 74%;
+}
+
+#password, #email, #confirm {
+	width: 100%;
 }
 
 #amount {

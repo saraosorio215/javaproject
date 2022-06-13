@@ -23,41 +23,45 @@
 </head>
 <body>
 	<div class="flex just-cent al-cent">
-		<div class="dark border-main">
-			<h3 class="padding-5 underlined">Login</h3>
-			<form:form action="/login/" method="post" modelAttribute="login">
-				<p>
-					<form:label path=""></form:label>
-					<form:errors path=""/>
-					<form:input path=""/>
+		<div class="dark border-main margin-5 white">
+			<h3 class="padding-5 underlined center">Login</h3>
+			<form:form action="/login/" method="post" modelAttribute="newLogin">
+				<p class="marg-top-10 marg-bottom-5 padding-5">
+					<form:label path="email"><span>Email</span></form:label>
+					<form:errors path="email"/>
+					<form:input path="email" id="email"/>
 				</p>
-				<p>
-					<form:label path=""></form:label>
-					<form:errors path=""/>
-					<form:input path=""/>
+				<p class="marg-bottom-10 padding-5">
+					<form:label path="password">Password</form:label>
+					<form:errors path="password"/>
+					<form:input type="password" path="password" id="password"/>
 				</p>
-				<input type="submit" value="Login"/>
+				<p class="center marg-bottom-10">
+					<input type="submit" value="Login" id="button"/>
+				</p>
 			</form:form>
 		</div>
-		<div class="light-grey border-main">
-			<h3 class="padding-5 underlined">Register</h3>
-			<form:form action="/register/" method="post" modelAttribute="register">
-				<p>
-					<form:label path=""></form:label>
-					<form:errors path=""/>
-					<form:input path=""/>
+		<div class="light-grey border-main margin-5">
+			<h3 class="padding-5 underlined center">Register</h3>
+			<form:form action="/register/" method="post" modelAttribute="newUser">
+				<p class="marg-top-10 marg-bottom-5 padding-5">
+					<form:label path="email">Email</form:label>
+					<form:errors path="email"/>
+					<form:input path="email" id="email"/>
 				</p>
-				<p>
-					<form:label path=""></form:label>
-					<form:errors path=""/>
-					<form:input path=""/>
+				<p class="marg-bottom-5 padding-5">
+					<form:label path="password">Password</form:label>
+					<form:errors path="password"/>
+					<form:input type="password" path="password" id="password"/>
 				</p>
-				<p>
-					<form:label path=""></form:label>
-					<form:errors path=""/>
-					<form:input path=""/>
+				<p class="marg-bottom-10 padding-5">
+					<form:label path="confirm">Confirm Password</form:label>
+					<form:errors path="confirm"/>
+					<form:input path="confirm" type="password" id="confirm"/>
 				</p>
-				<input type="submit" value="Register"/>
+				<p class="center marg-bottom-10">
+					<input type="submit" value="Register" id="button"/>
+				</p>
 			</form:form>
 		</div>
 	</div>

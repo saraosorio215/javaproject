@@ -10,11 +10,16 @@ public class LoginUser {
 	private String email;
 	
 	@NotEmpty(message="Password is required")
-	@Size(min=8, max=20, message="Password must be between 8 and 20 characters")
+	@Size(min=8, max=100, message="Password must be between 8 and 20 characters")
 	private String password;
 	
 	//CONSTRUCTOR
 	public LoginUser() {
+	}
+	
+	public LoginUser(String email, String password) {
+		this.email = email;
+		this.password = password;
 	}
 
 	//GETTERS & SETTERS

@@ -23,6 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name="users")
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,12 +33,12 @@ public class User {
 	private String email;
 	
 	@NotEmpty(message="Password is required")
-	@Size(min=8, max=20, message="Password must be between 8 and 20 characters")
+	@Size(min=7, max=100, message="Password must be between 8 and 20 characters")
 	private String password;
 	
 	@Transient
 	@NotEmpty(message="Must confirm password")
-	@Size(min=8, max=20, message="Password must be between 8 and 20 characters")
+	@Size(min=7, max=100, message="Password must be between 8 and 20 characters")
 	private String confirm;
 	
 	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
@@ -55,6 +56,12 @@ public class User {
 	
 	//CONSTRUCTOR
 	public User() {
+	}
+	
+	public User(String email, String password, String confirm) {
+		this.email = email;
+		this.password = password;
+		this.confirm = confirm;
 	}
 	
 	//GETTERS & SETTERS

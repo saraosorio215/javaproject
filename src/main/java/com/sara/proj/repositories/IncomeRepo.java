@@ -10,4 +10,5 @@ import com.sara.proj.models.Income;
 @Repository
 public interface IncomeRepo extends CrudRepository<Income, Long> {
 	List<Income> findAll();
+
 }
