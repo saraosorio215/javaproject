@@ -1,7 +1,11 @@
 package com.sara.proj.services;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +74,18 @@ public class BillService {
 			catSum = round(catSum, 2);
 			map.put(catName, catSum);
 		}
-		return map;
+        List<Map.Entry<String, Double> > list = new LinkedList<Map.Entry<String, Double> >(
+                map.entrySet());
+        Collections.sort(
+            list,
+            (i1,
+             i2) -> i1.getValue().compareTo(i2.getValue()));
+        Collections.reverse(list);
+        HashMap<String, Double> temp = new LinkedHashMap<String, Double>();
+        for (Map.Entry<String, Double> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
 	}
 	
 	public static double round(double value, int places) {

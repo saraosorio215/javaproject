@@ -27,8 +27,16 @@
 		<h1>Budget Tracker</h1>
 		<h2 class="marg-bottom-5">June 2022</h2>
 	</div>
-	<div class="flex border-main centered margin-5">
-		<div class="dark">
+	<div class="flex just-left marg-left-20">
+		<div class="pink">
+			<h4 class="padding-10">Overview</h4>
+		</div>
+		<div class="marg-left-20 orange">
+			<h4 class="padding-10">New account</h4>
+		</div>
+	</div>
+	<div class="flex centered marg-left-5 marg-right-5 marg-bottom-5 al-cent">
+		<div class="dark full border-main">
 			<div>
 				<div class="flex sp-even marg-top-10">
 					<div>
@@ -44,8 +52,8 @@
 									</thead>
 									<tbody>
 										<tr class="grey">
-											<td class="padding-5"><h3><fmt:formatNumber value="${totalDue}" type="currency" /></h3></td>
-											<td class="center border-left padding-5"><h3><fmt:formatNumber value="${totalPaid}" type="currency" /></h3></td>
+											<td class="padding-5 light-grey"><h3><fmt:formatNumber value="${totalDue}" type="currency" /></h3></td>
+											<td class="center border-left padding-5 light-grey"><h3><fmt:formatNumber value="${totalPaid}" type="currency" /></h3></td>
 										</tr>
 									</tbody>
 								</table>
@@ -61,7 +69,7 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td class="padding-5 grey"><h3><fmt:formatNumber value="${totalIncome}" type="currency" /></h3></td>
+											<td class="padding-5 light-grey"><h3><fmt:formatNumber value="${totalIncome}" type="currency" /></h3></td>
 											<c:if test="${(totalIncome-totalPaid) > 0}">
 												<td class="center border-left padding-5 green"><h3><fmt:formatNumber value="${totalIncome - totalPaid}" type="currency" /></h3></td>
 											</c:if>
@@ -75,10 +83,10 @@
 						</div>
 						<div class="padding-5 marg-top-10">
 							<div>
-								<h3 class="center marg-bottom-5 white">Remaining</h3>
 							</div>
 							<div class="hundred flex green">
 								<div style="width: ${(totalPaid / totalIncome) * 100}%" class="red"></div>
+								<h4 class="marg-left-5">Remaining</h4>
 								</div>
 							</div>
 						</div>
@@ -86,26 +94,31 @@
 							<div class="marg-bottom-5 center">
 								<h2 class="white">Where your money's going</h2>
 							</div>
-							<div class="marg-left-5 border padding-10 padd-bottom-20 yellow">
+							<div class="marg-left-5 border padding-10 padd-bottom-20 black bar-title">
 								<c:forEach items="${currPercent}" var="entry">
+								<c:if test="${entry.value > 0.0}">
 								<div class="flex marg-bottom-5">
 									<h3><c:out value="${entry.key}"/>:</h3>
 									<h3 class="marg-left-5"><c:out value="${entry.value}"/>%</h3>				
 								</div>
+								</c:if>
 								</c:forEach>
 								<div class="hundred flex al-cent bar">
 									<c:forEach items="${currPercent}" var="entry">
-										<div style="width: ${entry.value}%" class="color overflow-h padding-5"><span class="marg-left-3 white"><c:out value="${entry.key}"/></span></div>
+									<c:if test="${entry.value > 0.0}">
+										<div style="width: ${entry.value}%" class="overflow-h padding-5"><span class="marg-left-3 black-text"><c:out value="${entry.key}"/></span></div>
+									</c:if>
 									</c:forEach>
 								</div>
 							</div>
 						</div>
 					</div>
-		            <div class="marg-left-5 padding-5 marg-right-5">
+		            <div class="margin-5 padding-5">
 		                <div>
-		                    <h2 class="center marg-bottom-5 white">All Bills</h2>
+		                    <h2 class="left marg-bottom-5 white marg-left-5">All Bills</h2>
+		                    <h4 class="marg-bottom-5 marg-left-5 white">Total: <fmt:formatNumber value="${totalPaid + totalDue}" type="currency" /></h4>
 		                </div>
-		                <div>
+		                <div class="margin-5">
 		                    <table class="border center bill-list-t">
 		                        <thead>
 		                            <tr class="grey">
@@ -131,11 +144,11 @@
 		                                    <td class="underlined"><img src="images/checkmark-icon.png" alt="logo" id="icon-sm"></td>
 		                                    <td class="underlined"><a href="/unpaid/${bill.id}/"><button id="button">Not Paid</button></a></td>
 		                                </c:if>
-		                                <td class="underlined"><a href="/edit/bill${bill.id}/"><img src="images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
+		                                <td class="underlined"><a href="/edit/bill${bill.id}/" id="button-edit"><img src="images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
 		                                <td class="underlined">
 		                                    <form action="/delete/bill/${bill.id}/" method="post">
 		                                        <input type="hidden" name="_method" value="delete">
-		                                        <button type="submit" id="button"><img src="images/delete-icon.png" alt="logo" id="icon-sm"></button>
+		                                        <button type="submit" id="button-trash"><img src="images/delete-icon.png" alt="logo" id="icon-sm"></button>
 		                                    </form>
 		                                </td>
 		                            </tr>
@@ -143,21 +156,48 @@
 		                        </tbody>
 		                    </table>
 		                </div>
-		                <div class="flex padding-5">
-		                    <h4>Total:</h4>
-		                    <h4 class="marg-left-5"><fmt:formatNumber value="${totalPaid + totalDue}" type="currency" /></h4>
-		                </div>
 		            </div>
 				</div>
 	        </div>
-        	<div class="grey full border-left">
+        	<div class="full add-form">
 			    <div class="center">
-				    <div class="marg-bottom-10 dark underlined">
+				    <div class="dark underlined">
 				    	<h2 class="center padding-5 white">Quick Add</h2>
-				    </div>	
-			        <div class="margin-5 marg-bottom-10">
-			            <h3 class="marg-bottom-5 marg-top-5 center">Add Bills</h3>
-			            <form:form action="/new/bill/" method="post" modelAttribute="bill" class="left">
+				    </div>
+				    <div class="add-cat underlined">
+			            <h3 class="marg-bottom-5 center">Add Category</h3>
+			            <form:form action="/new/cat/" method="post" modelAttribute="cat" autocomplete="off">
+			                <h4 class="marg-bottom-10 left">
+			                    <form:label path="name">Name</form:label>
+			                    <form:errors path="name"/>
+			                    <form:input path="name" id="name"/>
+			                </h4>
+			                <p class="center">
+			                    <input type="submit" value="Create" id="button"/>
+			                </p>
+			            </form:form>
+			        </div>
+			        <div class="add-income underlined">
+			            <h3 class="marg-bottom-5 center">Add Income</h3>
+			            <form:form action="/new/income/" method="post" modelAttribute="income" class="left" autocomplete="off">
+			            <h4 class="marg-bottom-5">
+				            <form:label path="name">Name</form:label>
+			                <form:errors path="name"/>
+			                <form:input path="name" id="name"/>
+			            </h4>
+			            <h4 class="marg-bottom-10">
+			                <form:label path="amount">Amount</form:label>
+		                    <form:errors path="amount"/>
+		                    <form:input path="amount" id="amount"/>
+			            </h4>
+			            <p class="center">
+			                <input type="submit" value="Add" id="button"/>
+			            </p>
+		                </form:form>
+			        </div>
+			        <div class="add-bill underlined">
+			            <h3 class="marg-bottom-5 marg-top-5 center">Add Bill</h3>
+			            <form:form action="/new/bill/" method="post" modelAttribute="bill" class="left" autocomplete="off">
 			                <h4 class="marg-bottom-5">
 			                    <form:label path="name">Name</form:label>
 			                    <form:errors path="name"/>
@@ -170,56 +210,23 @@
 			                </h4>
 			                <h4 class="marg-bottom-5">
 			                    <form:label path="category">Category</form:label>
-			                    <form:select path="category">
+			                    <form:select path="category" id="category">
 			                        <c:forEach var="oneCat" items="${allcats}">
-			                            <form:option value="${oneCat.id}" path="category">
+			                            <form:option value="${oneCat.id}" path="category" id="cat-name">
 			                                <c:out value="${oneCat.name}"/>
 			                            </form:option>				
 			                        </c:forEach>
 			                    </form:select>
 			                </h4>
-			                <div class="marg-bottom-5 flex just-left al-cent">
+			                <div class="marg-bottom-10 flex just-left al-cent">
 			                    <form:label path="isPaid" class="marg-right-5"><h4>Paid?</h4></form:label>
-			                    <form:radiobutton path="isPaid" value="true"/>
+			                    <form:radiobutton path="isPaid" value="true" id="radio"/>
 			                    <form:label path="isPaid" class="marg-right-10 marg-left-5">Yes</form:label>
-			                    <form:radiobutton path="isPaid" value="false"/>
+			                    <form:radiobutton path="isPaid" value="false" id="radio"/>
 			                    <form:label path="isPaid" class="marg-left-5">No</form:label>
 			                </div>
 			                <p class="center">
 			                    <input type="submit" value="Submit" id="button"/>
-			                </p>
-			            </form:form>
-			        </div>
-			        <br />
-			        <div class="margin-5 marg-bottom-10">
-			            <h3 class="marg-bottom-5 center">Add Income</h3>
-			                <form:form action="/new/income/" method="post" modelAttribute="income" class="left">
-			                <h4 class="marg-bottom-5">
-			                    <form:label path="name">Name</form:label>
-			                    <form:errors path="name"/>
-			                    <form:input path="name" id="name"/>
-			                </h4>
-			                <h4 class="marg-bottom-5">
-			                    <form:label path="amount">Amount</form:label>
-			                    <form:errors path="amount"/>
-			                    <form:input path="amount" id="amount"/>
-			                </h4>
-			                <p class="center">
-			                    <input type="submit" value="Add" id="button"/>
-			                </p>
-			                </form:form>
-			        </div>
-			        <br />
-			        <div class="margin-5">
-			            <h3 class="marg-bottom-5 center">Add Category</h3>
-			            <form:form action="/new/cat/" method="post" modelAttribute="cat">
-			                <h4 class="marg-bottom-5 left">
-			                    <form:label path="name">Name</form:label>
-			                    <form:errors path="name"/>
-			                    <form:input path="name" id="name"/>
-			                </h4>
-			                <p class="center">
-			                    <input type="submit" value="Create" id="button"/>
 			                </p>
 			            </form:form>
 			        </div>
