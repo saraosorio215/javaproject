@@ -32,29 +32,6 @@ public class BillService {
 	}
 	
 	//METHODS
-	public Double totalDue() {
-		List<Bill> allBills = billRepo.findAll();
-		Double totalAmt = 0.0;
-		for(int i=0; i<allBills.size(); i++) {
-			if(allBills.get(i).getIsPaid() == false) {
-				totalAmt += allBills.get(i).getAmount();				
-			}
-		}
-		return totalAmt;
-	}
-	
-	
-	public Double totalPaid() {
-		List<Bill> allBills = billRepo.findAll();
-		Double totalPaid = 0.0;
-		for(int i=0; i<allBills.size(); i++) {
-			if(allBills.get(i).getIsPaid() == true) {
-				totalPaid += allBills.get(i).getAmount();				
-			}
-		}
-		return totalPaid;
-	}
-	
 	public HashMap<String, Double> moneySpent(){
 		HashMap<String, Double> map = new HashMap<String, Double>();
 		List<Category> allCats = catRepo.findAll();

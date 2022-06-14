@@ -21,15 +21,6 @@ public class IncomeService {
 	}
 	
 	//METHODS
-	public Double totalIncome() {
-		Double totalIncome = 0.0;
-		List<Income> allIncome = incomeRepo.findAll();
-		for(int i=0; i<allIncome.size(); i++) {
-			totalIncome += allIncome.get(i).getAmount();
-		}
-		return totalIncome;
-	}
-	
 	//FIND ALL
 	public List<Income> allIncome(){
 		return incomeRepo.findAll();

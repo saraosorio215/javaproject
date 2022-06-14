@@ -23,12 +23,7 @@ public class UserService {
 	
 	@Autowired
 	private UserRepo userRepo;
-	
-	@Autowired
-	private CategoryRepo catRepo;
-	
-	@Autowired
-	private BillRepo billRepo;
+
 	
 	//METHODS
 	public Double totalBills(Long id) {

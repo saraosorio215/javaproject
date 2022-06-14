@@ -31,7 +31,8 @@ public class BillController {
 		Bill currBill = billServ.findById(id);
 		currBill.setIsPaid(true);
 		billServ.updateBill(currBill);
-		return "redirect:/";
+		Long newId = currBill.getAccount().getId();
+		return "redirect:/acct/" + newId + "/";
 	}
 	
 	@GetMapping("/unpaid/{id}/")
@@ -39,7 +40,8 @@ public class BillController {
 		Bill currBill = billServ.findById(id);
 		currBill.setIsPaid(false);
 		billServ.updateBill(currBill);
-		return "redirect:/";
+		Long newId = currBill.getAccount().getId();
+		return "redirect:/acct/" + newId + "/";
 	}
 	
 	
@@ -54,14 +56,15 @@ public class BillController {
 			bill.setAccount(currAcct);
 			billServ.createBill(bill);
 			currAcct.getBills().add(bill);
-			return "redirect:/overview/";
+			return "redirect:/acct/" + id + "/";
 		}
 	}
 	
 	//DELETE METHOD
 	@DeleteMapping("/delete/bill/{id}/")
 	public String deleteBill(@PathVariable("id") Long id) {
+		Long newId = billServ.findById(id).getAccount().getId();
 		billServ.deleteBill(id);
-		return "redirect:/";
+		return "redirect:/acct/" + newId + "/";
 	}
 }

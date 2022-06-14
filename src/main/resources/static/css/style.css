@@ -362,7 +362,6 @@ body {
 
 .blank {
 	text-decoration: none;
-	color: black;
 }
 
 .tabs {
@@ -395,27 +394,27 @@ body {
 	background-color: #664d00;
 }
 
-.bar-title div:nth-child(1) {
+.bar-title div:nth-child(1), .bar-title a:nth-child(1) {
 	color: #89fc00;
 }
-.bar-title div:nth-child(2) {
+.bar-title div:nth-child(2), .bar-title a:nth-child(2)  {
 	color: #01baef;
 }
-.bar-title div:nth-child(3) {
+.bar-title div:nth-child(3), .bar-title a:nth-child(3)  {
 	color: #f72585;
 }
-.bar-title div:nth-child(4) {
+.bar-title div:nth-child(4), .bar-title a:nth-child(4)  {
 	color: #1dd3b0;
 }
-.bar-title div:nth-child(5) {
+.bar-title div:nth-child(5), .bar-title a:nth-child(5)  {
 	color: #8a54ff;
 }
-.bar-title div:nth-child(6) {
+.bar-title div:nth-child(6), .bar-title a:nth-child(6)  {
 	color: #fe3218;
 }
-.bar-title div:nth-child(7) {
+.bar-title div:nth-child(7), .bar-title a:nth-child(7)  {
 	color: #5d0933;
 }
-.bar-title div:nth-child(8) {
+.bar-title div:nth-child(8), .bar-title a:nth-child(8)  {
 	color: #664d00;
 }

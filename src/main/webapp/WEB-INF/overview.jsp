@@ -28,13 +28,15 @@
 		<a href="/logout/">Logout</a>
 	</div>
 	<div class="flex just-cent">
-		<div class="border-main padding-5">
-			<div class="padding-5">
-				<h2 class="center underlined">All Accounts</h2>
+		<div class="border-main black">
+			<div class="underlined padding-5 dark">
+				<h2 class="center padding-5 white">All Accounts</h2>
 			</div>
-			<div class="padding-5">
+			<div class="padding-5 bar-title">
 				<c:forEach items="${allAccounts}" var="acct">
-					<a href="/acct/${acct.id}/"><c:out value="${acct.name}"/></a>
+					<div class="marg-left-5 marg-top-5">
+						<span><a href="/acct/${acct.id}/" class="blank"><c:out value="${acct.name}"/></a></span>
+					</div>
 				</c:forEach>
 			</div>
 		</div>

@@ -1,7 +1,5 @@
 package com.sara.proj.controllers;
 
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,8 +17,6 @@ import com.sara.proj.models.LoginUser;
 import com.sara.proj.models.User;
 import com.sara.proj.services.AccountService;
 import com.sara.proj.services.BillService;
-import com.sara.proj.services.CategoryService;
-import com.sara.proj.services.IncomeService;
 import com.sara.proj.services.UserService;
 
 @Controller
@@ -28,12 +24,6 @@ public class MainController {
 	
 	@Autowired
 	private BillService billServ;
-	
-	@Autowired
-	private CategoryService catServ;
-	
-	@Autowired
-	private IncomeService incomeServ;
 	
 	@Autowired
 	private UserService userServ;
@@ -47,20 +37,13 @@ public class MainController {
 		User currUser = userServ.findOneById((Long) session.getAttribute("user_id"));
 		Account currAcct = acctServ.findOneById(id);
 		model.addAttribute("currAcct", currAcct);
-		List<Category> allCats = currUser.getCategories();
-		model.addAttribute("allcats", allCats);
-		Double totalDue = billServ.totalDue();
-		model.addAttribute("totalDue", totalDue);
-		Double totalPaid = billServ.totalPaid();
-		model.addAttribute("totalPaid", totalPaid);
-		Double totalIncome = incomeServ.totalIncome();
-		model.addAttribute("totalIncome", totalIncome);
-		List<Bill> allBills = currAcct.getBills();
-		model.addAttribute("allBills", allBills);
-		HashMap<String, Double> currPercent = billServ.moneySpent();
-		List<Account> allAccounts = currUser.getAccounts();
-		model.addAttribute("allAccounts", allAccounts);
-		model.addAttribute("currPercent", currPercent);
+		model.addAttribute("allcats", currUser.getCategories());
+		model.addAttribute("totalDue", acctServ.totalDue(id));
+		model.addAttribute("totalPaid", acctServ.totalPaid(id));
+		model.addAttribute("totalIncome", acctServ.totalIncome(id));
+		model.addAttribute("allBills", currAcct.getBills());
+		model.addAttribute("allAccounts", currUser.getAccounts());
+		model.addAttribute("currPercent", billServ.moneySpent());
 		model.addAttribute("income", new Income());
 		model.addAttribute("bill", new Bill());
 		return "main.jsp";
@@ -73,12 +56,10 @@ public class MainController {
 		User currUser = userServ.findOneById(userid);
 		model.addAttribute("currUser", currUser);
 		model.addAttribute("newAccount", new Account());
-		Double totalBills = userServ.totalBills(userid);
-		model.addAttribute("totalBills", totalBills);
-		Double totalIncome = userServ.totalIncome(userid);
-		model.addAttribute("totalIncome", totalIncome);
-		List<Account> allAccounts = currUser.getAccounts();
-		model.addAttribute("allAccounts", allAccounts);
+		model.addAttribute("totalBills", userServ.totalBills(userid));
+		model.addAttribute("totalIncome", userServ.totalIncome(userid));
+		model.addAttribute("allAccounts", currUser.getAccounts());
+		model.addAttribute("allCats", currUser.getCategories());
 		model.addAttribute("cat", new Category());
 		return "overview.jsp";
 	}

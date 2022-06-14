@@ -29,7 +29,6 @@ public class IncomeController {
 	@PostMapping("/new/income/{id}")
 	public String newIncome(@Valid @ModelAttribute("income") Income income, BindingResult result, Model model, @PathVariable("id") Long id) {
 		if(result.hasErrors()) {
-			System.out.println(result);
 			model.addAttribute("bill", new Bill());
 			return "main.jsp";
 		}
@@ -38,7 +37,8 @@ public class IncomeController {
 			income.setAccount(acct);
 			incomeServ.createIncome(income);
 			acct.getIncomes().add(income);
-			return "redirect:/overview/";
+			acctServ.updateAccount(acct);
+			return "redirect:/acct/" + id + "/";
 		}
 	}
 }

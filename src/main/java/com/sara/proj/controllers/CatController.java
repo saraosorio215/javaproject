@@ -33,7 +33,7 @@ public class CatController {
 			User currUser = userServ.findOneById((Long) session.getAttribute("user_id"));
 			cat.setUser(currUser);
 			catServ.createCat(cat);
-			return "redirect:/";
+			return "redirect:/overview/";
 		}
 	}
 }
