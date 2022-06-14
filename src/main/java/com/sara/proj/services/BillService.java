@@ -8,13 +8,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sara.proj.models.Bill;
 import com.sara.proj.models.Category;
+import com.sara.proj.repositories.AccountRepo;
 import com.sara.proj.repositories.BillRepo;
-import com.sara.proj.repositories.CategoryRepo;
+import com.sara.proj.repositories.UserRepo;
 
 @Service
 public class BillService {
@@ -23,22 +26,25 @@ public class BillService {
 	private BillRepo billRepo;
 	
 	@Autowired
-	private CategoryRepo catRepo;
+	private AccountRepo acctRepo;
+	
+	@Autowired
+	private UserRepo userRepo;
 	
 	
 	//METHODS
-	public HashMap<String, Double> moneySpent(){
+	public HashMap<String, Double> moneySpent(Long acct_id, Long user_id){
 		HashMap<String, Double> map = new HashMap<String, Double>();
-		List<Category> allCats = catRepo.findAll();
-		List<Bill> allBills = billRepo.findAll();
+		List<Category> allCats = userRepo.findById(user_id).get().getCategories();
+		List<Bill> allBills = acctRepo.findById(acct_id).get().getBills();
 		Double totalAmt = 0.0;
 		for(int i=0; i<allBills.size(); i++) {
 			totalAmt += allBills.get(i).getAmount();				
 		}
-		for(int i=0; i<allCats.size(); i++) {
+		for(int x=0; x<allCats.size(); x++) {
 			Double catSum = 0.0;
-			String catName = allCats.get(i).getName();
-			List<Bill> allCatBills = allCats.get(i).getBills();
+			String catName = allCats.get(x).getName();
+			List<Bill> allCatBills = allCats.get(x).getBills();
 			for(int j=0; j<allCatBills.size(); j++) {
 				catSum += allCatBills.get(j).getAmount();
 			}

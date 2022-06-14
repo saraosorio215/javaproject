@@ -9,6 +9,11 @@
 	font-family: 'Montserrat', sans-serif;
 }
 
+.main-size {
+	width: 2000px;
+	height: 500px;
+}
+
 .flex {
 	display: flex;
 }
@@ -55,6 +60,10 @@
 
 .padd-bottom-5 {
 	padding-bottom: 5px;
+}
+
+.padd-bottom-10 {
+	padding-bottom: 10px;
 }
 
 .padd-bottom-20 {

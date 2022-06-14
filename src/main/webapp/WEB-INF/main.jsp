@@ -30,7 +30,7 @@
 		<br />
 		<a href="/logout/">Logout</a>
 	</div>
-	<div class="flex just-cent">
+	<div class="flex just-cent main-size">
 		<div class="border-main black">
 			<div class="underlined padding-5 dark">
 				<h2 class="center padding-5 white">All Accounts</h2>
@@ -38,7 +38,9 @@
 			<div class="padding-5 bar-title">
 				<c:forEach items="${allAccounts}" var="acct">
 					<div class="marg-left-5 marg-top-5">
-						<a href="/acct/${acct.id}/" class="blank"><c:out value="${acct.name}"/></a>
+						<a href="/acct/${acct.id}/" class="blank">
+						<c:out value="${acct.name}"/>
+						</a>
 					</div>
 				</c:forEach>
 			</div>
@@ -192,15 +194,15 @@
 		                    <form:errors path="amount"/>
 		                    <form:input path="amount" id="amount"/>
 			            </h4>
+			            <form:hidden path="account" value="${currAcct.id}"/>
 			            <p class="center">
-		                    <form:hidden path="account" value="${currAcct}"/>
 			                <input type="submit" value="Add" id="button"/>
 			            </p>
 		                </form:form>
 			        </div>
 			        <div class="add-bill underlined">
 			            <h3 class="marg-bottom-5 marg-top-5 center">Add Bill</h3>
-			            <form:form action="/new/bill/${currAcct.id}/" method="post" modelAttribute="bill" class="left" autocomplete="off">
+			            <form:form action="/new/bill/" method="post" modelAttribute="bill" class="left" autocomplete="off">
 			                <h4 class="marg-bottom-5">
 			                    <form:label path="name">Name</form:label>
 			                    <form:errors path="name"/>
@@ -228,6 +230,7 @@
 			                    <form:radiobutton path="isPaid" value="false" id="radio"/>
 			                    <form:label path="isPaid" class="marg-left-5">No</form:label>
 			                </div>
+			                <form:hidden path="account" value="${currAcct.id}"/>
 			                <p class="center">
 			                    <input type="submit" value="Submit" id="button"/>
 			                </p>

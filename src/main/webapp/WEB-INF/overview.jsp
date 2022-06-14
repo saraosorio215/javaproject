@@ -27,7 +27,7 @@
 		<h2 class="marg-bottom-5">Welcome</h2>
 		<a href="/logout/">Logout</a>
 	</div>
-	<div class="flex just-cent">
+	<div class="flex just-cent main-size">
 		<div class="border-main black">
 			<div class="underlined padding-5 dark">
 				<h2 class="center padding-5 white">All Accounts</h2>
@@ -40,7 +40,7 @@
 				</c:forEach>
 			</div>
 		</div>
-		<div class="dark border-main">
+		<div class="dark border-main white">
 			<div class="center">
 				<h2 class="padding-5">Overview</h2>
 			</div>
@@ -50,8 +50,10 @@
 			</div>
 		</div>
 		<div class="border-main">
-			<h2 class="center underlined padding-5">Quick Add</h2>
-			<div>
+			<div class="dark">
+				<h2 class="white center underlined padding-5">Quick Add</h2>
+			</div>
+			<div class="orange">
 				<h3 class="center padding-5">Add Account</h3>
 				<h6 class="marg-bottom-10">(e.g. "June 2022", "Summer Trip", "Job Earnings", etc.)</h6>
 				<form:form action="/new/account/" method="post" modelAttribute="newAccount">
@@ -60,7 +62,7 @@
 						<form:errors path="name"/>
 						<form:input path="name"/>
 					</p>
-					<p class="center marg-bottom-10">
+					<p class="center padd-bottom-10">
 						<input type="submit" value="Create" id="button"/>
 					</p>
 				</form:form>

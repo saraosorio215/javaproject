@@ -32,7 +32,7 @@ public class UserService {
 		for(int i=0; i<allCats.size(); i++) {
 			List<Bill> allBills = allCats.get(i).getBills();
 			for(int j=0; j<allBills.size(); j++) {
-				total += allBills.get(i).getAmount();
+				total += allBills.get(j).getAmount();
 			}
 		}
 		return total;
@@ -44,7 +44,7 @@ public class UserService {
 		for(int i=0; i<allAccts.size(); i++) {
 			List<Income> allIncome = allAccts.get(i).getIncomes();
 			for(int j=0; j<allIncome.size(); j++) {
-				total += allIncome.get(i).getAmount();
+				total += allIncome.get(j).getAmount();
 			}
 		}
 		return total;

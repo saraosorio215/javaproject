@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sara.proj.models.Account;
 import com.sara.proj.models.Bill;
@@ -33,9 +33,8 @@ public class IncomeController {
 			return "main.jsp";
 		}
 		else {
-			Account acct = income.getAccount();
-			System.out.println(acct.getName());
 			incomeServ.createIncome(income);
+			Account acct = income.getAccount();
 			acct.getIncomes().add(income);
 			acctServ.updateAccount(acct);
 			Long id = acct.getId();

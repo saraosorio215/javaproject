@@ -34,7 +34,8 @@ public class MainController {
 	
 	@GetMapping("/acct/{id}/")
 	public String mainPage(@PathVariable("id") Long id, Model model, HttpSession session) {
-		User currUser = userServ.findOneById((Long) session.getAttribute("user_id"));
+		Long user_id = (Long) session.getAttribute("user_id");
+		User currUser = userServ.findOneById(user_id);
 		Account currAcct = acctServ.findOneById(id);
 		model.addAttribute("currAcct", currAcct);
 		model.addAttribute("allcats", currUser.getCategories());
@@ -43,7 +44,7 @@ public class MainController {
 		model.addAttribute("totalIncome", acctServ.totalIncome(id));
 		model.addAttribute("allBills", currAcct.getBills());
 		model.addAttribute("allAccounts", currUser.getAccounts());
-		model.addAttribute("currPercent", billServ.moneySpent());
+		model.addAttribute("currPercent", billServ.moneySpent(id, user_id));
 		model.addAttribute("income", new Income());
 		model.addAttribute("bill", new Bill());
 		return "main.jsp";
@@ -56,15 +57,15 @@ public class MainController {
 		User currUser = userServ.findOneById(userid);
 		model.addAttribute("currUser", currUser);
 		model.addAttribute("newAccount", new Account());
-		model.addAttribute("totalBills", userServ.totalBills(userid));
 		model.addAttribute("totalIncome", userServ.totalIncome(userid));
+		model.addAttribute("totalBills", userServ.totalBills(userid));
 		model.addAttribute("allAccounts", currUser.getAccounts());
 		model.addAttribute("allCats", currUser.getCategories());
 		model.addAttribute("cat", new Category());
 		return "overview.jsp";
 	}
 	
-	@GetMapping("/loginreg/")
+	@GetMapping("/")
 	public String loginReg(Model model) {
 		model.addAttribute("newUser", new User());
 		model.addAttribute("newLogin", new LoginUser());

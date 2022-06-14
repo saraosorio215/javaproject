@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sara.proj.models.Account;
 import com.sara.proj.models.Bill;
+import com.sara.proj.models.Income;
 import com.sara.proj.services.AccountService;
 import com.sara.proj.services.BillService;
 
@@ -46,16 +48,18 @@ public class BillController {
 	
 	
 	//POST METHOD
-	@PostMapping("/new/bill/{id}")
-	public String newBill(@Valid @ModelAttribute("bill")Bill bill, BindingResult result, @PathVariable("id") Long id) {
+	@PostMapping("/new/bill/")
+	public String newBill(@Valid @ModelAttribute("bill")Bill bill, BindingResult result, Model model) {
 		if(result.hasErrors()) {
+			model.addAttribute("income", new Income());
 			return "main.jsp";
 		}
 		else {
-			Account currAcct = acctServ.findOneById(id);
-			bill.setAccount(currAcct);
 			billServ.createBill(bill);
-			currAcct.getBills().add(bill);
+			Account acct = bill.getAccount();
+			acct.getBills().add(bill);
+			acctServ.updateAccount(acct);
+			Long id = acct.getId();
 			return "redirect:/acct/" + id + "/";
 		}
 	}
