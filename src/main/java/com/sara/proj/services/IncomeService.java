@@ -13,7 +13,7 @@ import com.sara.proj.repositories.IncomeRepo;
 public class IncomeService {
 	
 	@Autowired
-	private final IncomeRepo incomeRepo;
+	private IncomeRepo incomeRepo;
 	
 	//CONSTRUCTOR
 	public IncomeService(IncomeRepo incomeRepo) {

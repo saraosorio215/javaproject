@@ -20,16 +20,11 @@ import com.sara.proj.repositories.CategoryRepo;
 public class BillService {
 	
 	@Autowired
-	private final BillRepo billRepo;
+	private BillRepo billRepo;
 	
 	@Autowired
-	private final CategoryRepo catRepo;
+	private CategoryRepo catRepo;
 	
-	//CONSTRUCTOR
-	public BillService(BillRepo billRepo, CategoryRepo catRepo) {
-		this.billRepo = billRepo;
-		this.catRepo = catRepo;
-	}
 	
 	//METHODS
 	public HashMap<String, Double> moneySpent(){

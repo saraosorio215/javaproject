@@ -150,20 +150,20 @@
 		                            <tr class="light-grey center">
 		                                <td class="underlined"><c:out value="${bill.getName()}"/></td>
 		                                <td class="underlined"><fmt:formatNumber value="${bill.getAmount()}" type="currency" /></td>
-		                                <c:if test="${bill.getIsPaid() == false}"><td class="underlined center"><img src="images/x-icon.png" alt="logo" id="icon-sm"></td>
+		                                <c:if test="${bill.getIsPaid() == false}"><td class="underlined center"><img src="${pageContext.request.contextPath}/images/x-icon.png" alt="logo" id="icon-sm"></td>
 			                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
 		                                    <td class="underlined"><a href="/paid/${bill.id}/"><button id="button">Paid</button></a></td>
 		                                </c:if>
 		                                <c:if test="${bill.getIsPaid() == true}">
-		                                    <td class="underlined"><img src="images/checkmark-icon.png" alt="logo" id="icon-sm"></td>
+		                                    <td class="underlined"><img src="${pageContext.request.contextPath}/images/checkmark-icon.png" alt="logo" id="icon-sm"></td>
 			                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
 		                                    <td class="underlined"><a href="/unpaid/${bill.id}/"><button id="button">Not Paid</button></a></td>
 		                                </c:if>
-		                                <td class="underlined"><a href="/edit/bill${bill.id}/" id="button-edit"><img src="images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
+		                                <td class="underlined"><a href="/edit/bill${bill.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
 		                                <td class="underlined">
 		                                    <form action="/delete/bill/${bill.id}/" method="post">
 		                                        <input type="hidden" name="_method" value="delete">
-		                                        <button type="submit" id="button-trash"><img src="images/delete-icon.png" alt="logo" id="icon-sm"></button>
+		                                        <button type="submit" id="button-trash"><img src="${pageContext.request.contextPath}/images/delete-icon.png" alt="logo" id="icon-sm"></button>
 		                                    </form>
 		                                </td>
 		                            </tr>
@@ -181,7 +181,7 @@
 				    </div>
 			        <div class="add-income underlined">
 			            <h3 class="marg-bottom-5 center">Add Income</h3>
-			            <form:form action="/new/income/${currAcct.id}/" method="post" modelAttribute="income" class="left" autocomplete="off">
+			            <form:form action="/new/income/" method="post" modelAttribute="income" class="left" autocomplete="off">
 			            <h4 class="marg-bottom-5">
 				            <form:label path="name">Name</form:label>
 			                <form:errors path="name"/>
@@ -193,6 +193,7 @@
 		                    <form:input path="amount" id="amount"/>
 			            </h4>
 			            <p class="center">
+		                    <form:hidden path="account" value="${currAcct}"/>
 			                <input type="submit" value="Add" id="button"/>
 			            </p>
 		                </form:form>
