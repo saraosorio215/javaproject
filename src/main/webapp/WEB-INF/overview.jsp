@@ -27,8 +27,8 @@
 		<h2 class="marg-bottom-5">Welcome</h2>
 		<a href="/logout/">Logout</a>
 	</div>
-	<div class="flex just-cent main-size">
-		<div class="border-main black">
+	<div class="flex just-cent main-size centered">
+		<div class="border-main black single">
 			<div class="underlined padding-5 dark">
 				<h2 class="center padding-5 white">All Accounts</h2>
 			</div>
@@ -40,7 +40,7 @@
 				</c:forEach>
 			</div>
 		</div>
-		<div class="dark border-main white">
+		<div class="dark border-main white double">
 			<div class="center">
 				<h2 class="padding-5">Overview</h2>
 			</div>
@@ -49,13 +49,13 @@
 				<h3>Total Income: <fmt:formatNumber value="${totalIncome}" type="currency" /></h3>
 			</div>
 		</div>
-		<div class="border-main">
+		<div class="border-main single">
 			<div class="dark">
 				<h2 class="white center underlined padding-5">Quick Add</h2>
 			</div>
 			<div class="orange">
 				<h3 class="center padding-5">Add Account</h3>
-				<h6 class="marg-bottom-10">(e.g. "June 2022", "Summer Trip", "Job Earnings", etc.)</h6>
+				<h6 class="marg-bottom-10 center">(e.g. "June 2022", "Summer Trip", "Job Earnings", etc.)</h6>
 				<form:form action="/new/account/" method="post" modelAttribute="newAccount">
 					<p class="marg-bottom-10 marg-left-5">
 						<form:label path="name">Name</form:label>

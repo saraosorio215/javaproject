@@ -55,6 +55,17 @@ public class AccountService {
 		return acctRepo.findAll();
 	}
 	
+	//FIND ALL INCOME TO ONE ACCOUNT
+	public List<Income> incAcc(Long id){
+		Optional<Account> optAcct = acctRepo.findById(id);
+		if(optAcct.isPresent()) {
+			Account currAcct = optAcct.get();
+			List<Income> allIncome = currAcct.getIncomes();
+			return allIncome;
+		}
+		return null;
+	}
+	
 	//FIND ONE
 	public Account findOneById(Long id) {
 		Optional<Account> optionalAccount = acctRepo.findById(id);

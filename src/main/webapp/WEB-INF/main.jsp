@@ -30,10 +30,10 @@
 		<br />
 		<a href="/logout/">Logout</a>
 	</div>
-	<div class="flex just-cent main-size">
-		<div class="border-main black">
+	<div class="flex just-cent main-size centered">
+		<div class="border-main black single">
 			<div class="underlined padding-5 dark">
-				<h2 class="center padding-5 white">All Accounts</h2>
+				<h3 class="center padding-5 white">All Accounts</h3>
 			</div>
 			<div class="padding-5 bar-title">
 				<c:forEach items="${allAccounts}" var="acct">
@@ -45,7 +45,7 @@
 				</c:forEach>
 			</div>
 		</div>
-		<div class="dark main-acct">
+		<div class="dark main-acct double">
 			<div>
 				<div class="flex sp-even marg-top-10">
 					<div>
@@ -110,7 +110,7 @@
 						</div>
 						<div class="marg-bottom-5 marg-right-5 half padding-5">
 							<div class="marg-bottom-5 center">
-								<h2 class="white">Where your money's going</h2>
+								<h3 class="white">Money Distribution</h3>
 							</div>
 							<div class="marg-left-5 border padding-10 padd-bottom-20 black bar-title">
 								<c:forEach items="${currPercent}" var="entry">
@@ -173,10 +173,34 @@
 		                        </tbody>
 		                    </table>
 		                </div>
+		            	<div>
+				            <div>
+				            	<h2>All Income</h2>
+				            	<h4>Total: <fmt:formatNumber value="${totalIncome}" type="currency" /></h4>
+			    	        </div>
+			    	        <div>
+			    	        	<table>
+			    	        		<thead>
+			    	        			<tr>
+			    	        				<th class="underlined padding-5">Name</th>
+			    	        				<th class="underlined padding-5">Amount</th>
+			    	        			</tr>
+			    	        		</thead>
+			    	        		<tbody>
+			    	        			<c:forEach items="${allIncome}" var="inc">
+			    	        			<tr>
+			    	        				<td class="underlined"><c:out value="${inc.name}"/></td>
+			    	        				<td class="underlined"><fmt:formatNumber value="${inc.amount}" type="currency" /></td>
+			    	        			</tr>
+			    	        			</c:forEach>
+			    	        		</tbody>
+			    	        	</table>
+			    	        </div>
+			            </div>
 		            </div>
 				</div>
 	        </div>
-        	<div class="full add-form border-main">
+        	<div class="add-form border-main single">
 			    <div class="center">
 				    <div class="dark underlined">
 				    	<h2 class="center padding-5 white">Quick Add</h2>
@@ -184,12 +208,12 @@
 			        <div class="add-income underlined">
 			            <h3 class="marg-bottom-5 center">Add Income</h3>
 			            <form:form action="/new/income/" method="post" modelAttribute="income" class="left" autocomplete="off">
-			            <h4 class="marg-bottom-5">
+			            <h4 class="marg-bottom-5 flex">
 				            <form:label path="name">Name</form:label>
 			                <form:errors path="name"/>
 			                <form:input path="name" id="name"/>
 			            </h4>
-			            <h4 class="marg-bottom-10">
+			            <h4 class="marg-bottom-10 flex">
 			                <form:label path="amount">Amount</form:label>
 		                    <form:errors path="amount"/>
 		                    <form:input path="amount" id="amount"/>
@@ -203,17 +227,17 @@
 			        <div class="add-bill underlined">
 			            <h3 class="marg-bottom-5 marg-top-5 center">Add Bill</h3>
 			            <form:form action="/new/bill/" method="post" modelAttribute="bill" class="left" autocomplete="off">
-			                <h4 class="marg-bottom-5">
+			                <h4 class="marg-bottom-5 flex">
 			                    <form:label path="name">Name</form:label>
 			                    <form:errors path="name"/>
 			                    <form:input path="name" id="name"/>
 			                </h4>
-			                <h4 class="marg-bottom-5">
+			                <h4 class="marg-bottom-5 flex">
 			                    <form:label path="amount">Amount</form:label>
 			                    <form:errors path="amount"/>
 			                    <form:input path="amount" id="amount"/>
 			                </h4>
-			                <h4 class="marg-bottom-5">
+			                <h4 class="marg-bottom-5 flex">
 			                    <form:label path="category">Category</form:label>
 			                    <form:select path="category" id="category">
 			                        <c:forEach var="oneCat" items="${allcats}">

@@ -9,13 +9,17 @@
 	font-family: 'Montserrat', sans-serif;
 }
 
-.main-size {
-	width: 2000px;
-	height: 500px;
-}
 
 .flex {
 	display: flex;
+}
+
+.single {
+	flex: 1;
+}
+
+.double {
+	flex:4;
 }
 
 .sp-btw {
@@ -147,9 +151,6 @@
 	height: 30px;
 }
 
-.full {
-	width: 100%;
-}
 
 .eighty {
 	width: 80%;
@@ -247,7 +248,7 @@ body {
 }
 
 .add-cat, .add-income, .add-bill {
-	padding: 15px 10px 15px 10px;
+	padding: 10px;
 }
 
 /**************BORDERS************************/
@@ -288,7 +289,7 @@ body {
 }
 
 #name {
-	width: 74%;
+	width: 95%;
 }
 
 #password, #email, #confirm {
@@ -296,7 +297,7 @@ body {
 }
 
 #amount {
-	width: 67%;
+	width: 4em;
 }
 
 #name:focus, #amount:focus {
@@ -313,6 +314,7 @@ body {
 
 #category {
 	border: none;
+	margin-left: 5px;
 }
 
 /*************BUTTONS**************************/

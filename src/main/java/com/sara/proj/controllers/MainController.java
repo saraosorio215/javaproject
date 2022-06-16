@@ -43,6 +43,7 @@ public class MainController {
 		model.addAttribute("totalPaid", acctServ.totalPaid(id));
 		model.addAttribute("totalIncome", acctServ.totalIncome(id));
 		model.addAttribute("allBills", currAcct.getBills());
+		model.addAttribute("allIncome", acctServ.incAcc(id));
 		model.addAttribute("allAccounts", currUser.getAccounts());
 		model.addAttribute("currPercent", billServ.moneySpent(id, user_id));
 		model.addAttribute("income", new Income());
