@@ -48,6 +48,7 @@ public class MainController {
 		model.addAttribute("currPercent", billServ.moneySpent(id, user_id));
 		model.addAttribute("income", new Income());
 		model.addAttribute("bill", new Bill());
+		model.addAttribute("cat", new Category());
 		return "main.jsp";
 	}
 	

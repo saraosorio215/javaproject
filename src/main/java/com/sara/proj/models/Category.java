@@ -74,6 +74,24 @@ public class Category {
 	public void setBills(List<Bill> bills) {
 		this.bills = bills;
 	}
+	
+	public int getNumBills() {
+		List<Bill> catBills = this.bills;
+		int count = 0;
+		for(int i=0; i<catBills.size(); i++) {
+			count +=1;
+		}
+		return count;
+	}
+	
+	public Double getAmtSpent() {
+		List<Bill> catBills = this.bills;
+		Double sum = 0.0;
+		for(int i=0; i<catBills.size(); i++) {
+			sum += catBills.get(i).getAmount();
+		}
+		return sum;
+	}
 
 	public Date getCreatedAt() {
 		return createdAt;

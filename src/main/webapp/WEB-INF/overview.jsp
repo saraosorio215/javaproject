@@ -27,29 +27,61 @@
 		<h2 class="marg-bottom-5">Welcome</h2>
 		<a href="/logout/">Logout</a>
 	</div>
-	<div class="flex just-cent main-size centered">
-		<div class="border-main black single">
+	<div class="flex just-cent main-size centered al-cent">
+		<div class="border-main black minimum">
 			<div class="underlined padding-5 dark">
 				<h2 class="center padding-5 white">All Accounts</h2>
 			</div>
 			<div class="padding-5 bar-title">
 				<c:forEach items="${allAccounts}" var="acct">
-					<div class="marg-left-5 marg-top-5">
-						<span><a href="/acct/${acct.id}/" class="blank"><c:out value="${acct.name}"/></a></span>
-					</div>
+					<a href="/acct/${acct.id}/" class="blank marg-left-5 marg-top-5 flex column"><c:out value="${acct.name}"/></a>
 				</c:forEach>
 			</div>
 		</div>
-		<div class="dark border-main white double">
-			<div class="center">
+		<div class="dark border-main four">
+			<div class="center white">
 				<h2 class="padding-5">Overview</h2>
 			</div>
-			<div class="padding-5">
+			<div class="padding-5 white">
 				<h3>Total Bills: <fmt:formatNumber value="${totalBills}" type="currency" /></h3>
 				<h3>Total Income: <fmt:formatNumber value="${totalIncome}" type="currency" /></h3>
 			</div>
+			<div>
+				<div>
+					<h3 class="white">All Categories</h3>
+				</div>
+				<div>
+				<table class="center inc-list-t border">
+					<thead>
+						<tr class="dark-blue">
+							<th class="underlined padding-5">Name</th>
+							<th class="underlined padding-5"># of Bills</th>
+							<th class="underlined padding-5">Total Spent</th>
+							<th class="underlined padding-5" colspan="2">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${allCats}" var="cat">
+						<tr class="light-blue">
+							<td><c:out value="${cat.name}"/></td>
+							<td><c:out value="${cat.getNumBills()}"/></td>
+							<td><fmt:formatNumber value="${cat.getAmtSpent()}" type="currency"/></td>
+							<td><a href="/edit/cat/${cat.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
+							<td>
+								<form action="/delete/cat/${cat.id}/" method="post">
+				                 	<input type="hidden" name="_method" value="delete">
+				                    <button type="submit" id="button-trash-3"><img src="${pageContext.request.contextPath}/images/delete-icon.png" alt="logo" id="icon-sm"></button>
+				                </form>
+							</td>
+						</tr>						
+						</c:forEach>
+					</tbody>
+				</table>
+			
+				</div>
+			</div>
 		</div>
-		<div class="border-main single">
+		<div class="border-main">
 			<div class="dark">
 				<h2 class="white center underlined padding-5">Quick Add</h2>
 			</div>

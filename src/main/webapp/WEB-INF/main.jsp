@@ -30,22 +30,20 @@
 		<br />
 		<a href="/logout/">Logout</a>
 	</div>
-	<div class="flex just-cent main-size centered">
-		<div class="border-main black single">
+	<div class="flex just-cent main-size centered al-cent">
+		<div class="border-main black minimum">
 			<div class="underlined padding-5 dark">
 				<h3 class="center padding-5 white">All Accounts</h3>
 			</div>
-			<div class="padding-5 bar-title">
+			<div class="padding-5 bar-title scroll">
 				<c:forEach items="${allAccounts}" var="acct">
-					<div class="marg-left-5 marg-top-5">
-						<a href="/acct/${acct.id}/" class="blank">
+						<a href="/acct/${acct.id}/" class="blank marg-left-5 marg-top-5 flex column">
 						<c:out value="${acct.name}"/>
 						</a>
-					</div>
 				</c:forEach>
 			</div>
 		</div>
-		<div class="dark main-acct double">
+		<div class="dark main-acct four">
 			<div>
 				<div class="flex sp-even marg-top-10">
 					<div>
@@ -131,99 +129,109 @@
 							</div>
 						</div>
 					</div>
-		            <div class="margin-5 padding-5">
-		                <div>
-		                    <h2 class="left marg-bottom-5 white marg-left-5">All Bills</h2>
-		                    <h4 class="marg-bottom-5 marg-left-5 white">Total: <fmt:formatNumber value="${totalPaid + totalDue}" type="currency" /></h4>
+		            <div class="margin-5 padding-5 flex sp-btw">
+		            	<div class="four">
+			                <div class="flex al-cent marg-bottom-5 marg-left-10 white left">
+			                    <h3>All Bills -- </h3>
+			                    <h4 class="marg-left-5">Total: <fmt:formatNumber value="${totalPaid + totalDue}" type="currency" /></h4>
+			                </div>
+		                	<div class="margin-5 scroll">
+			                    <table class="border bill-list-t">
+			                        <thead>
+			                            <tr class="dark-red center">
+			                                <th class="underlined padding-5">Name</th>
+			                                <th class="underlined padding-5">Amount</th>
+			                                <th class="underlined padding-5">Paid?</th>
+			                                <th class="underlined padding-5">Category</th>
+			                                <th class="underlined padding-5" colspan="3">Actions</th>
+			                            </tr>
+			                        </thead>
+			                        <tbody>
+			                            <c:forEach items="${allBills}" var="bill">
+			                            <tr class="light-red center">
+			                                <td class="underlined padding-3"><c:out value="${bill.getName()}"/></td>
+			                                <td class="underlined padding-3"><fmt:formatNumber value="${bill.getAmount()}" type="currency" /></td>
+			                                <c:if test="${bill.getIsPaid() == false}"><td class="underlined center"><img src="${pageContext.request.contextPath}/images/x-icon.png" alt="logo" id="icon-sm"></td>
+				                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
+			                                    <td class="underlined"><a href="/paid/${bill.id}/"><button id="button">Paid</button></a></td>
+			                                </c:if>
+			                                <c:if test="${bill.getIsPaid() == true}">
+			                                    <td class="underlined"><img src="${pageContext.request.contextPath}/images/checkmark-icon.png" alt="logo" id="icon-sm"></td>
+				                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
+			                                    <td class="underlined"><a href="/unpaid/${bill.id}/"><button id="button">Not Paid</button></a></td>
+			                                </c:if>
+			                                <td class="underlined"><a href="/edit/bill/${bill.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
+			                                <td class="underlined">
+			                                    <form action="/delete/bill/${bill.id}/" method="post">
+			                                        <input type="hidden" name="_method" value="delete">
+			                                        <button type="submit" id="button-trash"><img src="${pageContext.request.contextPath}/images/delete-icon.png" alt="logo" id="icon-sm"></button>
+			                                    </form>
+			                                </td>
+			                            </tr>
+			                            </c:forEach>
+			                        </tbody>
+			                    </table>
+		                	</div>
 		                </div>
-		                <div class="margin-5">
-		                    <table class="border bill-list-t">
-		                        <thead>
-		                            <tr class="grey center">
-		                                <th class="underlined padding-5">Name</th>
-		                                <th class="underlined padding-5">Amount</th>
-		                                <th class="underlined padding-5">Paid?</th>
-		                                <th class="underlined padding-5">Category</th>
-		                                <th class="underlined padding-5" colspan="3">Actions</th>
-		                            </tr>
-		                        </thead>
-		                        <tbody>
-		                            <c:forEach items="${allBills}" var="bill">
-		                            <tr class="light-grey center">
-		                                <td class="underlined"><c:out value="${bill.getName()}"/></td>
-		                                <td class="underlined"><fmt:formatNumber value="${bill.getAmount()}" type="currency" /></td>
-		                                <c:if test="${bill.getIsPaid() == false}"><td class="underlined center"><img src="${pageContext.request.contextPath}/images/x-icon.png" alt="logo" id="icon-sm"></td>
-			                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
-		                                    <td class="underlined"><a href="/paid/${bill.id}/"><button id="button">Paid</button></a></td>
-		                                </c:if>
-		                                <c:if test="${bill.getIsPaid() == true}">
-		                                    <td class="underlined"><img src="${pageContext.request.contextPath}/images/checkmark-icon.png" alt="logo" id="icon-sm"></td>
-			                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
-		                                    <td class="underlined"><a href="/unpaid/${bill.id}/"><button id="button">Not Paid</button></a></td>
-		                                </c:if>
-		                                <td class="underlined"><a href="/edit/bill${bill.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
-		                                <td class="underlined">
-		                                    <form action="/delete/bill/${bill.id}/" method="post">
-		                                        <input type="hidden" name="_method" value="delete">
-		                                        <button type="submit" id="button-trash"><img src="${pageContext.request.contextPath}/images/delete-icon.png" alt="logo" id="icon-sm"></button>
-		                                    </form>
-		                                </td>
-		                            </tr>
-		                            </c:forEach>
-		                        </tbody>
-		                    </table>
-		                </div>
-		            	<div>
-				            <div>
-				            	<h2>All Income</h2>
-				            	<h4>Total: <fmt:formatNumber value="${totalIncome}" type="currency" /></h4>
-			    	        </div>
-			    	        <div>
-			    	        	<table>
-			    	        		<thead>
-			    	        			<tr>
-			    	        				<th class="underlined padding-5">Name</th>
-			    	        				<th class="underlined padding-5">Amount</th>
-			    	        			</tr>
-			    	        		</thead>
-			    	        		<tbody>
-			    	        			<c:forEach items="${allIncome}" var="inc">
-			    	        			<tr>
-			    	        				<td class="underlined"><c:out value="${inc.name}"/></td>
-			    	        				<td class="underlined"><fmt:formatNumber value="${inc.amount}" type="currency" /></td>
-			    	        			</tr>
-			    	        			</c:forEach>
-			    	        		</tbody>
-			    	        	</table>
-			    	        </div>
-			            </div>
-		            </div>
+		            	<div class="double marg-left-10 marg-right-5">
+					    	<div class="white marg-left-10 marg-bottom-5 flex al-cent left">
+					        	<h3>All Income -- </h3>
+					          	<h4 class="marg-left-5">Total: <fmt:formatNumber value="${totalIncome}" type="currency" /></h4>
+				    	    </div>
+				    	    <div class="scroll">
+				    	        <table class="inc-list-t border center">
+				    	        	<thead>
+				    	        		<tr class="dark-green">
+				    	       				<th class="underlined padding-5">Name</th>
+				    	       				<th class="underlined padding-5">Amount</th>
+				    	       				<th class="underlined padding-5" colspan="2">Actions</th>
+				    	       			</tr>
+				    	       		</thead>
+				    	       		<tbody>
+				    	       			<c:forEach items="${allIncome}" var="inc">
+				    	       			<tr class="light-green">
+				    	       				<td class="underlined padding-3"><c:out value="${inc.name}"/></td>
+				            				<td class="underlined padding-3"><fmt:formatNumber value="${inc.amount}" type="currency" /></td>
+				            				<td class="underlined"><a href="/edit/inc/${inc.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
+				            				<td class="underlined">
+				            					<form action="/delete/inc/${inc.id}/" method="post">
+			                                        <input type="hidden" name="_method" value="delete">
+			                                        <button type="submit" id="button-trash-2"><img src="${pageContext.request.contextPath}/images/delete-icon.png" alt="logo" id="icon-sm"></button>
+			                                    </form>
+				            				</td>
+				   	        			</tr>
+				   	        			</c:forEach>
+				   	        		</tbody>
+				   	        	</table>
+			   	        	</div>
+			           	</div>
+		           	</div>
 				</div>
-	        </div>
-        	<div class="add-form border-main single">
-			    <div class="center">
-				    <div class="dark underlined">
-				    	<h2 class="center padding-5 white">Quick Add</h2>
+	       	</div>
+	       	<div class="add-form border-main single">
+				<div class="center">
+				    <div class="dark underlined padding-5">
+				    	<h3 class="center padding-5 white">Quick Add</h3>
 				    </div>
 			        <div class="add-income underlined">
-			            <h3 class="marg-bottom-5 center">Add Income</h3>
-			            <form:form action="/new/income/" method="post" modelAttribute="income" class="left" autocomplete="off">
-			            <h4 class="marg-bottom-5 flex">
-				            <form:label path="name">Name</form:label>
-			                <form:errors path="name"/>
-			                <form:input path="name" id="name"/>
-			            </h4>
-			            <h4 class="marg-bottom-10 flex">
-			                <form:label path="amount">Amount</form:label>
-		                    <form:errors path="amount"/>
-		                    <form:input path="amount" id="amount"/>
-			            </h4>
-			            <form:hidden path="account" value="${currAcct.id}"/>
-			            <p class="center">
-			                <input type="submit" value="Add" id="button"/>
-			            </p>
-		                </form:form>
-			        </div>
+				    	<h3 class="marg-bottom-5 center">Add Income</h3>
+				        <form:form action="/new/income/" method="post" modelAttribute="income" class="left" autocomplete="off">
+							<h4 class="marg-bottom-5 flex">
+						        <form:label path="name">Name</form:label>
+					            <form:errors path="name"/>
+					            <form:input path="name" id="name"/>
+				            </h4>
+				            <h4 class="marg-bottom-10 flex">
+				                <form:label path="amount">Amount</form:label>
+			                    <form:errors path="amount"/>
+			                    <form:input path="amount" id="amount"/>
+				            </h4>
+				            <form:hidden path="account" value="${currAcct.id}"/>
+				            <p class="center">
+				                <input type="submit" value="Add" id="button"/>
+				            </p>
+			                </form:form>
+				    </div>
 			        <div class="add-bill underlined">
 			            <h3 class="marg-bottom-5 marg-top-5 center">Add Bill</h3>
 			            <form:form action="/new/bill/" method="post" modelAttribute="bill" class="left" autocomplete="off">
@@ -256,10 +264,23 @@
 			                </div>
 			                <form:hidden path="account" value="${currAcct.id}"/>
 			                <p class="center">
-			                    <input type="submit" value="Submit" id="button"/>
+			                    <input type="submit" value="Add" id="button"/>
 			                </p>
 			            </form:form>
 			        </div>
+			        <div class="add-cat underlined">
+					<h3 class="marg-bottom-5 center">Add Category</h3>
+				    	<form:form action="/new/cat/" method="post" modelAttribute="cat" autocomplete="off">
+				        	<h4 class="marg-bottom-10 left flex">
+				            	<form:label path="name">Name</form:label>
+				                <form:errors path="name"/>
+				                <form:input path="name" id="name"/>
+				            </h4>
+				            <p class="center">
+			                    <input type="submit" value="Create" id="button"/>
+			                </p>
+			            </form:form>
+					</div>
     			</div>
 			</div>
         </div>

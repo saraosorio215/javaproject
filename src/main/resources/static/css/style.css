@@ -14,11 +14,22 @@
 	display: flex;
 }
 
+.minimum {
+	min-width: 12em;
+	min-height: 27em;
+	max-height: 100%;
+	overflow-y: auto;
+}
+
 .single {
 	flex: 1;
 }
 
 .double {
+	flex: 2;
+}
+
+.four {
 	flex:4;
 }
 
@@ -142,7 +153,7 @@
 	overflow-x: hidden;
 }
 
-.bills-t, .income-t, .bill-list-t {
+.bills-t, .income-t, .bill-list-t, .inc-list-t {
 	border-collapse: collapse;
 }
 
@@ -151,22 +162,19 @@
 	height: 30px;
 }
 
+.main-size {
+	width: 80%;
+	height: 35em;
+}
+
 
 .eighty {
 	width: 80%;
 }
 
-.seventy {
-	width: 70%;
-}
-
-.thirty {
-	width: 30%;
-}
-
-.bill-list-t {
+.bill-list-t, .inc-list-t {
 	width: 100%;
-	max-height: 100%;
+	max-height: 20em;
 	overflow-y: auto;
 }
 
@@ -185,6 +193,30 @@
 /**************BACKGROUND COLORS************************/
 .dark {
 	background-color: #323031;
+}
+
+.dark-green {
+	background-color: #789051;
+}
+
+.dark-red {
+	background-color: #D90B08;
+}
+
+.dark-blue {
+	background-color: #145c9e;
+}
+
+.light-green, #button-trash-2 {
+	background-color: #BCCCA4;
+}
+
+.light-red, #button-trash {
+	background-color: #FA7775;
+}
+
+.light-blue, #button-trash-3 {
+	background-color: #71abe1;
 }
 
 .black {
@@ -211,7 +243,7 @@ body {
 	background-color: #6B6B76;
 }
 
-.light-grey, #button-trash {
+.light-grey {
 	background-color: #A9A9B1;
 }
 
@@ -318,7 +350,7 @@ body {
 }
 
 /*************BUTTONS**************************/
-#button, #button-trash {
+#button, #button-trash-2, #button-trash, #button-trash-3 {
 	border: none;
 	padding: 3px 6px;
 	cursor: pointer;
@@ -326,7 +358,7 @@ body {
 	transition: 220ms all ease-in-out;
 }
 
-#button-trash:hover img, #button-edit:hover img {
+#button-trash:hover img, #button-edit:hover img, #button-trash-2:hover img, #button-trash-3:hover img {
         transform: scale(1.5);
     }
 
@@ -375,8 +407,18 @@ body {
 	text-decoration: none;
 }
 
-.tabs {
-	margin-left: 20%;
+.scroll {
+	max-height: 16em;
+	overflow-y: auto;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 10px;
+  background-color: #A9A9B1;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: #888;
 }
 
 /****************BAR*********************/

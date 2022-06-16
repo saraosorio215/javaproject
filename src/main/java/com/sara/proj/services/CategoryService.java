@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sara.proj.models.Bill;
 import com.sara.proj.models.Category;
 import com.sara.proj.repositories.CategoryRepo;
 
@@ -13,7 +14,7 @@ import com.sara.proj.repositories.CategoryRepo;
 public class CategoryService {
 	
 	@Autowired
-	private final CategoryRepo catRepo;
+	private CategoryRepo catRepo;
 	
 	//CONSTRUCTOR
 	public CategoryService(CategoryRepo catRepo) {
@@ -21,6 +22,7 @@ public class CategoryService {
 	}
 	
 	//METHODS
+	
 	//FIND ALL
 	public List<Category> allCategories(){
 		return catRepo.findAll();
