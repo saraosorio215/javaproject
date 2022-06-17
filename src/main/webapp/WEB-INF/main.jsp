@@ -25,7 +25,7 @@
 <body>
 	<div class="center marg-top-5 marg-bottom-5">
 		<h1>Budget Tracker</h1>
-		<h2 class="marg-bottom-5">June 2022</h2>
+		<h2 class="marg-bottom-5"><c:out value="${currAcct.name}"/></h2>
 		<a href="/overview/">Overview</a>
 		<br />
 		<a href="/logout/">Logout</a>
@@ -119,7 +119,7 @@
 								</div>
 								</c:if>
 								</c:forEach>
-								<div class="hundred flex al-cent bar">
+								<div class="hundred flex al-cent bar light-grey">
 									<c:forEach items="${currPercent}" var="entry">
 									<c:if test="${entry.value > 0.0}">
 										<div style="width: ${entry.value}%" class="overflow-h padding-5"><span class="marg-left-3 black-text"><c:out value="${entry.key}"/></span></div>
@@ -136,9 +136,9 @@
 			                    <h4 class="marg-left-5">Total: <fmt:formatNumber value="${totalPaid + totalDue}" type="currency" /></h4>
 			                </div>
 		                	<div class="margin-5 scroll">
-			                    <table class="border bill-list-t">
+			                    <table class="border bill-list-t center">
 			                        <thead>
-			                            <tr class="dark-red center">
+			                            <tr class="dark-red">
 			                                <th class="underlined padding-5">Name</th>
 			                                <th class="underlined padding-5">Amount</th>
 			                                <th class="underlined padding-5">Paid?</th>
@@ -148,7 +148,7 @@
 			                        </thead>
 			                        <tbody>
 			                            <c:forEach items="${allBills}" var="bill">
-			                            <tr class="light-red center">
+			                            <tr class="light-red">
 			                                <td class="underlined padding-3"><c:out value="${bill.getName()}"/></td>
 			                                <td class="underlined padding-3"><fmt:formatNumber value="${bill.getAmount()}" type="currency" /></td>
 			                                <c:if test="${bill.getIsPaid() == false}"><td class="underlined center"><img src="${pageContext.request.contextPath}/images/x-icon.png" alt="logo" id="icon-sm"></td>
@@ -178,8 +178,8 @@
 					        	<h3>All Income -- </h3>
 					          	<h4 class="marg-left-5">Total: <fmt:formatNumber value="${totalIncome}" type="currency" /></h4>
 				    	    </div>
-				    	    <div class="scroll">
-				    	        <table class="inc-list-t border center">
+				    	    <div class="margin-5 scroll">
+				    	        <table class="border inc-list-t center">
 				    	        	<thead>
 				    	        		<tr class="dark-green">
 				    	       				<th class="underlined padding-5">Name</th>

@@ -75,6 +75,15 @@ public class Account {
 	public void setBills(List<Bill> bills) {
 		this.bills = bills;
 	}
+	
+	public Double moneySpent() {
+		List<Bill> allBills = this.bills;
+		Double total = 0.0;
+		for(int i=0; i<allBills.size(); i++) {
+			total += allBills.get(i).getAmount();
+		}
+		return total;
+	}
 
 	public List<Income> getIncomes() {
 		return incomes;
@@ -82,6 +91,15 @@ public class Account {
 
 	public void setIncomes(List<Income> incomes) {
 		this.incomes = incomes;
+	}
+	
+	public Double incomeMade() {
+		List<Income> allInc = this.incomes;
+		Double total = 0.0;
+		for(int i=0; i<allInc.size(); i++) {
+			total += allInc.get(i).getAmount();
+		}
+		return total;
 	}
 
 	public User getUser() {
