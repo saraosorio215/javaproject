@@ -22,7 +22,7 @@
 	<title>Login & Register</title>
 </head>
 <body>
-	<div class="flex just-cent al-cent">
+	<div class="flex just-cent al-cent marg-top-10">
 		<div class="dark border-main margin-5 white">
 			<h3 class="padding-5 underlined center">Login</h3>
 			<form:form action="/login/" method="post" modelAttribute="newLogin">
