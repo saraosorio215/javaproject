@@ -63,6 +63,7 @@ public class User {
 		this.password = password;
 		this.confirm = confirm;
 	}
+
 	
 	//GETTERS & SETTERS
 	public Long getId() {

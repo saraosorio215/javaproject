@@ -42,9 +42,23 @@
 			<div class="center white underlined padding-5">
 				<h2>Overview</h2>
 			</div>
-			<div class="padding-10 white">
-				<h3>Total Bills: <fmt:formatNumber value="${totalBills}" type="currency" /></h3>
+			<div class="padding-10 white center flex sp-even">
 				<h3>Total Income: <fmt:formatNumber value="${totalIncome}" type="currency" /></h3>
+				<h3>Total Bills: <fmt:formatNumber value="${totalBills}" type="currency" /></h3>
+			</div>
+			<div>
+				<div class="padding-10 white center">
+					<h3>Top Categories</h3>
+				</div>
+				<div class="flex sp-even row">
+					<c:forEach items="${allCats}" var="cat">
+						<div class="flex column center white" style="height: 100px;">
+							<div style="height: ${cat.getAmtSpent()/totalIncome * 100}%;" class="light-grey"></div>
+							<div><fmt:formatNumber value="${cat.getAmtSpent()}" type="currency"/></div>				
+							<div><p><c:out value="${cat.name}"/></p></div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 			<div class="flex sp-btw">
 				<div class="padding-5">
@@ -64,9 +78,9 @@
 							<tbody>
 								<c:forEach items="${allCats}" var="cat">
 								<tr class="light-blue">
-									<td class="underlined padding-3"><c:out value="${cat.name}"/></td>
-									<td class="underlined padding-3"><c:out value="${cat.getNumBills()}"/></td>
-									<td class="underlined padding-3"><fmt:formatNumber value="${cat.getAmtSpent()}" type="currency"/></td>
+									<td class="underlined padding-5 no-wrap"><c:out value="${cat.name}"/></td>
+									<td class="underlined padding-5"><c:out value="${cat.getNumBills()}"/></td>
+									<td class="underlined padding-5"><fmt:formatNumber value="${cat.getAmtSpent()}" type="currency"/></td>
 									<td class="underlined"><a href="/edit/cat/${cat.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
 									<td class="underlined">
 										<form action="/delete/cat/${cat.id}/" method="post">
@@ -98,10 +112,10 @@
 							<tbody>
 							<c:forEach items="${allAccounts}" var="acct">
 								<tr class="light-orange">
-									<td class="underlined padding-3"><c:out value="${acct.name}"/></td>
-									<td class="underlined padding-3"><fmt:formatNumber value="${acct.incomeMade()}" type="currency"/></td>
-									<td class="underlined padding-3"><fmt:formatNumber value="${acct.moneySpent()}" type="currency"/></td>
-									<td class="underlined padding-3"><fmt:formatNumber value="${acct.incomeMade() - acct.moneySpent()}" type="currency"/></td>
+									<td class="underlined padding-5 no-wrap"><c:out value="${acct.name}"/></td>
+									<td class="underlined padding-5"><fmt:formatNumber value="${acct.incomeMade()}" type="currency"/></td>
+									<td class="underlined padding-5"><fmt:formatNumber value="${acct.moneySpent()}" type="currency"/></td>
+									<td class="underlined padding-5"><fmt:formatNumber value="${acct.incomeMade() - acct.moneySpent()}" type="currency"/></td>
 									<td class="underlined"><a href="/edit/acct/${acct.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
 									<td class="underlined">
 										<form action="/delete/acct/${acct.id}/" method="post">

@@ -146,7 +146,7 @@
 			                                <th class="underlined padding-5">Amount</th>
 			                                <th class="underlined padding-5">Paid?</th>
 			                                <th class="underlined padding-5">Category</th>
-			                                <th class="underlined padding-5" colspan="3">Actions</th>
+			                                <th class="underlined padding-5" colspan="2">Actions</th>
 			                            </tr>
 			                        </thead>
 			                        <tbody>
@@ -160,10 +160,9 @@
 			                                </c:if>
 			                                <c:if test="${bill.getIsPaid() == true}">
 			                                    <td class="underlined"><img src="${pageContext.request.contextPath}/images/checkmark-icon.png" alt="logo" id="icon-sm"></td>
-				                                <td class="underlined"><c:out value="${bill.getCategory().getName()}"/></td>
+				                                <td class="underlined no-wrap"><c:out value="${bill.getCategory().getName()}"/></td>
 			                                    <td class="underlined"><a href="/unpaid/${bill.id}/"><button id="button">Not Paid</button></a></td>
 			                                </c:if>
-			                                <td class="underlined"><a href="/edit/bill/${bill.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
 			                                <td class="underlined">
 			                                    <form action="/delete/bill/${bill.id}/" method="post">
 			                                        <input type="hidden" name="_method" value="delete">
@@ -187,15 +186,14 @@
 				    	        		<tr class="dark-green">
 				    	       				<th class="underlined padding-5">Name</th>
 				    	       				<th class="underlined padding-5">Amount</th>
-				    	       				<th class="underlined padding-5" colspan="2">Actions</th>
+				    	       				<th class="underlined padding-5">Actions</th>
 				    	       			</tr>
 				    	       		</thead>
 				    	       		<tbody>
 				    	       			<c:forEach items="${allIncome}" var="inc">
 				    	       			<tr class="light-green">
-				    	       				<td class="underlined padding-3"><c:out value="${inc.name}"/></td>
-				            				<td class="underlined padding-3"><fmt:formatNumber value="${inc.amount}" type="currency" /></td>
-				            				<td class="underlined"><a href="/edit/inc/${inc.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
+				    	       				<td class="underlined padding-5 no-wrap"><c:out value="${inc.name}"/></td>
+				            				<td class="underlined padding-5"><fmt:formatNumber value="${inc.amount}" type="currency" /></td>
 				            				<td class="underlined">
 				            					<form action="/delete/inc/${inc.id}/" method="post">
 			                                        <input type="hidden" name="_method" value="delete">
