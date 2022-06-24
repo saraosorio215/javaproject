@@ -163,8 +163,8 @@
 }
 
 .main-size {
-
 	height: 35em;
+	max-width: 80em;
 }
 
 

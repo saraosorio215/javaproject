@@ -58,7 +58,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="grey">
+										<tr>
 											<c:if test="${totalDue > 0}">
 												<td class="padding-5 red">
 													<h3><fmt:formatNumber value="${totalDue}" type="currency" /></h3>
@@ -84,13 +84,16 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
+										<tr class="center">
 											<td class="padding-5 light-grey"><h3><fmt:formatNumber value="${totalIncome}" type="currency" /></h3></td>
 											<c:if test="${(totalIncome-totalPaid) > 0}">
 												<td class="center border-left padding-5 green"><h3><fmt:formatNumber value="${totalIncome - totalPaid}" type="currency" /></h3></td>
 											</c:if>
 											<c:if test="${(totalIncome-totalPaid) < 0}">
 												<td class="center border-left padding-5 red"><h3><fmt:formatNumber value="${totalIncome - totalPaid}" type="currency" /></h3></td>
+											</c:if>
+											<c:if test="${totalIncome == 0}">
+												<td class="light-grey border-left"><h3>$0.00</h3></td>
 											</c:if>
 										</tr>
 									</tbody>
@@ -270,7 +273,7 @@
 			        </div>
 			        <div class="add-cat underlined">
 					<h3 class="marg-bottom-5 center">Add Category</h3>
-				    	<form:form action="/new/cat/" method="post" modelAttribute="cat" autocomplete="off">
+				    	<form:form action="/new/cat/${currAcct.id}" method="post" modelAttribute="cat" autocomplete="off">
 				        	<h4 class="marg-bottom-10 left flex">
 				            	<form:label path="name">Name</form:label>
 				                <form:errors path="name"/>

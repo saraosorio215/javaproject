@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sara.proj.models.Category;
@@ -34,6 +35,19 @@ public class CatController {
 			cat.setUser(currUser);
 			catServ.createCat(cat);
 			return "redirect:/overview/";
+		}
+	}
+	
+	@PostMapping("/new/cat/{id}")
+	public String createCatId(@Valid @ModelAttribute("cat") Category cat, BindingResult result, HttpSession session, @PathVariable("id") Long id) {
+		if(result.hasErrors()) {
+			return "main.jsp";
+		}
+		else {
+			User currUser = userServ.findOneById((Long) session.getAttribute("user_id"));
+			cat.setUser(currUser);
+			catServ.createCat(cat);
+			return "redirect:/acct/" + id + "/";
 		}
 	}
 }

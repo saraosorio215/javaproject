@@ -39,16 +39,16 @@
 			</div>
 		</div>
 		<div class="dark border-main four">
-			<div class="center white">
-				<h2 class="padding-5">Overview</h2>
+			<div class="center white underlined padding-5">
+				<h2>Overview</h2>
 			</div>
-			<div class="padding-5 white">
+			<div class="padding-10 white">
 				<h3>Total Bills: <fmt:formatNumber value="${totalBills}" type="currency" /></h3>
 				<h3>Total Income: <fmt:formatNumber value="${totalIncome}" type="currency" /></h3>
 			</div>
 			<div class="flex sp-btw">
 				<div class="padding-5">
-					<div class="marg-left-10 marg-bottom-5">
+					<div class="center marg-bottom-5">
 						<h3 class="white">All Categories</h3>
 					</div>
 					<div class="margin-5 scroll">
@@ -81,7 +81,7 @@
 					</div>
 				</div>
 				<div class="padding-5">
-					<div class="marg-left-10 marg-bottom-5">
+					<div class="center marg-bottom-5">
 						<h3 class="white">All Accounts</h3>
 					</div>
 					<div class="margin-5 scroll">
