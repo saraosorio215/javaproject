@@ -47,18 +47,7 @@
 				<h3>Total Bills: <fmt:formatNumber value="${totalBills}" type="currency" /></h3>
 			</div>
 			<div>
-				<div class="padding-10 white center">
-					<h3>Top Categories</h3>
-				</div>
-				<div class="flex sp-even row">
-					<c:forEach items="${allCats}" var="cat">
-						<div class="flex column center white" style="height: 100px;">
-							<div style="height: ${cat.getAmtSpent()/totalIncome * 100}%;" class="light-grey"></div>
-							<div><fmt:formatNumber value="${cat.getAmtSpent()}" type="currency"/></div>				
-							<div><p><c:out value="${cat.name}"/></p></div>
-						</div>
-					</c:forEach>
-				</div>
+
 			</div>
 			<div class="flex sp-btw">
 				<div class="padding-5">
@@ -72,7 +61,7 @@
 									<th class="underlined padding-5">Name</th>
 									<th class="underlined padding-5"># of Bills</th>
 									<th class="underlined padding-5">Total Spent</th>
-									<th class="underlined padding-5" colspan="2">Actions</th>
+									<th class="underlined padding-5">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -82,12 +71,6 @@
 									<td class="underlined padding-5"><c:out value="${cat.getNumBills()}"/></td>
 									<td class="underlined padding-5"><fmt:formatNumber value="${cat.getAmtSpent()}" type="currency"/></td>
 									<td class="underlined"><a href="/edit/cat/${cat.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
-									<td class="underlined">
-										<form action="/delete/cat/${cat.id}/" method="post">
-						                 	<input type="hidden" name="_method" value="delete">
-						                    <button type="submit" id="button-trash-3"><img src="${pageContext.request.contextPath}/images/delete-icon.png" alt="logo" id="icon-sm"></button>
-						                </form>
-									</td>
 								</tr>						
 								</c:forEach>
 							</tbody>
