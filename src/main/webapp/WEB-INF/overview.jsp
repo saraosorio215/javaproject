@@ -61,7 +61,6 @@
 									<th class="underlined padding-5">Name</th>
 									<th class="underlined padding-5"># of Bills</th>
 									<th class="underlined padding-5">Total Spent</th>
-									<th class="underlined padding-5">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -70,7 +69,6 @@
 									<td class="underlined padding-5 no-wrap"><c:out value="${cat.name}"/></td>
 									<td class="underlined padding-5"><c:out value="${cat.getNumBills()}"/></td>
 									<td class="underlined padding-5"><fmt:formatNumber value="${cat.getAmtSpent()}" type="currency"/></td>
-									<td class="underlined"><a href="/edit/cat/${cat.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
 								</tr>						
 								</c:forEach>
 							</tbody>
@@ -89,7 +87,6 @@
 									<th class="underlined padding-5">Earned</th>
 									<th class="underlined padding-5">Spent</th>
 									<th class="underlined padding-5">Leftover</th>
-									<th class="underlined padding-5" colspan="2">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -99,13 +96,6 @@
 									<td class="underlined padding-5"><fmt:formatNumber value="${acct.incomeMade()}" type="currency"/></td>
 									<td class="underlined padding-5"><fmt:formatNumber value="${acct.moneySpent()}" type="currency"/></td>
 									<td class="underlined padding-5"><fmt:formatNumber value="${acct.incomeMade() - acct.moneySpent()}" type="currency"/></td>
-									<td class="underlined"><a href="/edit/acct/${acct.id}/" id="button-edit"><img src="${pageContext.request.contextPath}/images/edit-icon.png" alt="logo" id="icon-sm"></a></td>
-									<td class="underlined">
-										<form action="/delete/acct/${acct.id}/" method="post">
-					                 		<input type="hidden" name="_method" value="delete">
-					                    	<button type="submit" id="button-trash-4"><img src="${pageContext.request.contextPath}/images/delete-icon.png" alt="logo" id="icon-sm"></button>
-					                	</form>
-									</td>
 								</tr>
 							</c:forEach>
 							</tbody>
